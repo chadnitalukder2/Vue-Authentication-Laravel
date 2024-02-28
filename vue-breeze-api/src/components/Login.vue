@@ -1,3 +1,14 @@
+<script setup>
+import { ref } from 'vue';
+import axios from from 'axios';
+
+const form = ref({
+  email: '',
+  password: ''
+})
+</script>
+
+
 <template>
   <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
     <div class="container mx-auto">
@@ -55,6 +66,6 @@
     </div>
   </section>
 </template>
-<script setup></script>
+
 
 <style lang="scss" scoped></style>
