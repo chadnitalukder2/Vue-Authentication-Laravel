@@ -1,8 +1,3 @@
-<template>
-    <div>
-
-    </div>
-</template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -16,6 +11,14 @@ onMounted (async () => {
 })
 
 </script>
+
+<template>
+    <div>
+        <h1>{{ user?.name }}</h1>
+        <p>{{ user?.email }}</p>
+    </div>
+    
+</template>
 
 <style lang="scss" scoped>
 
