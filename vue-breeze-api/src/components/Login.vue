@@ -1,13 +1,24 @@
 <script setup>
-import { ref } from 'vue';
-import axios from from 'axios';
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const form = ref({
-  email: '',
-  password: ''
-})
-</script>
+  email: "",
+  password: "",
+});
 
+const handleLogin = async () => {
+  let response = await axios.post("/login", {
+    email: form.value.email,
+    password: form.value.password,
+  });
+  
+  router.push("/");
+};
+</script>
 
 <template>
   <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
@@ -18,12 +29,14 @@ const form = ref({
             class="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
           >
             <div class="mb-10 text-center md:mb-16">Laraveller</div>
-            <form>
+            <form @submit.prevent="handleLogin">
+             
               <div class="mb-6">
                 <input
                   type="email"
+                  v-model="form.email"
                   placeholder="Email"
-                  class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                  class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                 />
                 <div class="flex">
                   <span class="text-red-400 text-sm m-2 p-2"></span>
@@ -32,8 +45,9 @@ const form = ref({
               <div class="mb-6">
                 <input
                   type="password"
+                  v-model="form.password"
                   placeholder="Password"
-                  class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                  class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                 />
                 <div class="flex">
                   <span class="text-red-400 text-sm m-2 p-2"></span>
@@ -66,6 +80,5 @@ const form = ref({
     </div>
   </section>
 </template>
-
 
 <style lang="scss" scoped></style>
