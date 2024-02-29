@@ -24,6 +24,11 @@ const routes = [
     name: "ResetPassword",
     component: () => import("../components/ResetPassword.vue"),
   },
+  {
+    path: "/add-product",
+    name: "add-product",
+    component: () => import("../components/product/add_product.vue"),
+  },
 ];
 
 const router = createRouter({

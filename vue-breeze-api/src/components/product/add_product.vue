@@ -1,29 +1,5 @@
-<script setup>
-  import { ref } from 'vue';
-  import axios from 'axios';
-  import { useRouter } from 'vue-router';
-
-  const router = useRouter();
-  const form = ref({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: ''
-  })
-  const handleRegister = async () => {
-    await axios.post('/register', {
-      name:form.value.name,
-      email:form.value.email,
-      password:form.value.password,
-      password_confirmation:form.value.password_confirmation
-    });
-    router.push("/");
-  }
-</script>
-
 <template>
- 
-  <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
+    <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
     <div class="container mx-auto">
       <div class="-mx-4 flex flex-wrap">
         <div class="w-full px-4">
@@ -31,7 +7,7 @@
             class="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
           >
             <div class="mb-10 text-center md:mb-16">Register Page</div>
-            <form @submit.prevent="handleRegister">
+            <form >
               <div class="mb-6">
                 <input
                   type="text"
@@ -94,6 +70,10 @@
   </section>
 </template>
 
+<script setup>
 
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
