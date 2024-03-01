@@ -2,7 +2,7 @@
 <section class="bg-[#F4F7FF] py-20 lg:py-[120px]" >
     <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
-            <div class="w-full px-4">
+            <div class="w-full px-4" style="    padding-left: 15rem;">
                 <div class="relative mx-auto max-w-[650px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]">
                     <div class="mb-5 text-center md:mb-16">Add Product Page</div>
                     <form>

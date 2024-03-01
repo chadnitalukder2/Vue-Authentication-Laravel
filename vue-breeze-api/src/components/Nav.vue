@@ -1,6 +1,8 @@
 <template>
 <div>
-    <nav class=" bg-indigo-900 text-white px-2 py-2.5 sm:px-4" style="border-bottom: 1px solid;">
+    <nav class=" bg-indigo-900 text-white px-2 py-2.5 sm:px-4" style="border-bottom: 1px solid;     position: fixed;
+    width: 100%;
+    z-index: 99;">
         <div class="container mx-auto flex flex-wrap items-center justify-between" bis_skin_checked="1">
             <a href="https://laraveller.com/" class="flex items-center">
                 Laraveller
