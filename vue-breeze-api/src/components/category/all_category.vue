@@ -3,30 +3,30 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
-
+//---------------------------------------------------
 const category = ref([]);
 let showError = ref(false);
-
 const categoryInput = ref([]);
-
+//---------------------------------------------------
 onMounted(async () => {
   getCategory();
 });
-
+//---------------------------------------------------
 const getCategory = async () => {
   let response = await axios.get("/api/get_category");
   category.value = response.data.category;
   // console.log("response", category.value);
 };
+//---------------------------------------------------
 const deleteCategory = (id) => {
     axios.get(`/api/delete_category/${id}`)
     router.push('all-category');
 }
-
+//---------------------------------------------------
 const getToken = async () => {
   await axios.get("sanctum/csrf-cookie");
 };
-
+//---------------------------------------------------
 const addCategory = async () => {
         showError.value = false;
         if (!categoryInput.value.category_name ) {
@@ -43,7 +43,7 @@ const addCategory = async () => {
     categoryInput.value = []
     router.push('/all-category')
     };
-
+//---------------------------------------------------
 </script>
 
 <template>

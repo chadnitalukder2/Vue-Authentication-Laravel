@@ -3,30 +3,30 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
-
+//---------------------------------------------------
 const brand = ref([]);
 let showError = ref(false);
-
 const brandInput = ref([]);
-
+//---------------------------------------------------
 onMounted(async () => {
   getBrand();
 });
-
+//---------------------------------------------------
 const getBrand = async () => {
   let response = await axios.get("/api/get_brand");
   brand.value = response.data.brand;
   // console.log("response", category.value);
 };
+//---------------------------------------------------
 const deleteBrand = (id) => {
     axios.get(`/api/delete_brand/${id}`)
     router.push('all-brand');
 }
-
+//---------------------------------------------------
 const getToken = async () => {
   await axios.get("sanctum/csrf-cookie");
 };
-
+//---------------------------------------------------
 const addBrand = async () => {
         showError.value = false;
         if (!brandInput.value.brand_name ) {
@@ -43,7 +43,7 @@ const addBrand = async () => {
     brandInput.value = []
     router.push('/all-brand')
     };
-
+//---------------------------------------------------
 </script>
 
 <template>
