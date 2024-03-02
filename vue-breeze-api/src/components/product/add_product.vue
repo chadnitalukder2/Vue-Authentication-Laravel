@@ -4,9 +4,9 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
 //---------------------------------------------------
-const form = ref([]);
 const category = ref([]);
 const brand = ref([]);
+const form = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
   getCategory();
@@ -25,7 +25,31 @@ const getBrand = async () => {
   // console.log("response", category.value);
 };
 //---------------------------------------------------
+const handleFileChange = async (event) => {
+    form.value.product_img = event.target.files[0];
+}
+//---------------------------------------------------
+const addProduct = async () => {
+  let formData = new FormData();
+  formData.append("product_name", form.value.product_name);
+  formData.append("product_price", form.value.product_price);
+  formData.append("product_quantity", form.value.product_quantity);
+  formData.append("category_id", form.value.category_id);
+  formData.append("brand_id", form.value.brand_id);
+  formData.append("product_details", form.value.product_details);
+  formData.append("product_img", form.value.product_img);
 
+  try {
+    let response = await axios.post("/api/add_products", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log("response", response);
+  } catch (error) {
+    console.error("Error adding product:", error);
+  }
+};
 
 </script>
 
@@ -45,7 +69,7 @@ const getBrand = async () => {
               ">
                         Add Product Page
                     </div>
-                    <form>
+                    <form @submit.prevent="addProduct"  enctype="multipart/form-data">
                         <div class="mb-5">
                             <p style="text-align: left; padding-bottom: 10px">
                                 Product Name:
@@ -95,7 +119,7 @@ const getBrand = async () => {
                             <p style="text-align: left; padding-bottom: 10px">
                                 Product Image:
                             </p>
-                            <input  type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                            <input @change="handleFileChange"  type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
                         </div>
               
                         <div class="mb-5">
