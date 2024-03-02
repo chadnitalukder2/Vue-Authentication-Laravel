@@ -5,32 +5,33 @@
 
   const router = useRouter();
   const form = ref({
-    name: ' ',
-    email: ' ',
-    password: ' ',
-    password_confirmation: ' '
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
   })
   const handleRegister = async () => {
     await axios.post('/register', {
-      name: form.value.name,
-      email: form.value.email,
-      password: form.value.password,
-      password_confirmation: form.value.password_confirmation
+      name:form.value.name,
+      email:form.value.email,
+      password:form.value.password,
+      password_confirmation:form.value.password_confirmation
     });
     router.push("/");
   }
 </script>
 
 <template>
-  <!-- ====== Forms Section Start -->
-  <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
+ 
+  <section class="bg-[#F4F7FF] py-20 lg:py-[50px]">
     <div class="container mx-auto">
       <div class="-mx-4 flex flex-wrap">
-        <div class="w-full px-4">
+        <div class="w-full px-4" style="    padding-left: 15rem;">
           <div
             class="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
-          >
-            <div class="mb-10 text-center md:mb-16">Laraveller</div>
+          style="    margin-top: 60px;"
+            >
+            <div class="mb-10 text-center md:mb-16">Register Page</div>
             <form @submit.prevent="handleRegister">
               <div class="mb-6">
                 <input

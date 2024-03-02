@@ -1,0 +1,125 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+//---------------------------------------------------
+const form = ref([]);
+const category = ref([]);
+const brand = ref([]);
+//---------------------------------------------------
+onMounted(async () => {
+  getCategory();
+  getBrand();
+});
+//---------------------------------------------------
+const getCategory = async () => {
+  let response = await axios.get("/api/get_category");
+  category.value = response.data.category;
+  // console.log("response", category.value);
+};
+//---------------------------------------------------
+const getBrand = async () => {
+  let response = await axios.get("/api/get_brand");
+  brand.value = response.data.brand;
+  // console.log("response", category.value);
+};
+//---------------------------------------------------
+
+
+</script>
+
+<template>
+<section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
+    <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+            <div class="w-full px-4" style="padding-left: 15rem">
+                <div class="relative mx-auto max-w-[650px] overflow-hidden rounded-lg bg-white py-10 px-10 text-center sm:px-12 md:px-[60px]">
+                    <div class="mb-3 text-center md:mb-10" style="
+                background: rgb(49 46 129);
+                color: white;
+                padding: 10px;
+                width: 30%;
+                margin-left: 372px;
+                border-radius: 5px;
+              ">
+                        Add Product Page
+                    </div>
+                    <form>
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Name:
+                            </p>
+                            <input v-model="form.product_name" type="text" placeholder="Product Name" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                        </div>
+
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Price:
+                            </p>
+                            <input v-model="form.product_price" type="text" placeholder="Product Price" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                        </div>
+
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Quantity:
+                            </p>
+                            <input v-model="form.product_quantity" type="text" placeholder="Product Quantity" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                        </div>
+
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Category Name:
+                            </p>
+                            <select v-model="form.category_id" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none">
+                                <option disabled >Select category</option>
+                                <option v-for="item in category" :key="item.id">
+                                    {{ item.category_name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Brand Name:
+                            </p>
+                            <select v-model="form.brand_id" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none">
+                                <option disabled>Select brand</option>
+                                <option v-for="item in brand" :key="item.id">
+                                    {{ item.brand_name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Image:
+                            </p>
+                            <input  type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                        </div>
+              
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                Product Details:
+                            </p>
+                            <textarea v-model="form.product_details" type="text" placeholder="" style="text-align: left;" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none">
+                               bccnjn hbdnund
+                            </textarea>
+                        </div>
+
+                        <div class="mb-5">
+                            <button type="submit" class="w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</template>
+
+
+
+<style lang="scss" scoped></style>

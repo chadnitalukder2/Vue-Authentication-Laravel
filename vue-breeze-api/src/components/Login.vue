@@ -10,11 +10,17 @@ const form = ref({
   password: "",
 });
 
+const getToken = async () => {
+  await axios.get("sanctum/csrf-cookie");
+}
+
 const handleLogin = async () => {
+   await getToken();
   let response = await axios.post("/login", {
     email: form.value.email,
     password: form.value.password,
   });
+  // console.log('response', response);
   
   router.push("/");
 };
@@ -24,11 +30,11 @@ const handleLogin = async () => {
   <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
     <div class="container mx-auto">
       <div class="-mx-4 flex flex-wrap">
-        <div class="w-full px-4">
+        <div class="w-full px-4" style="    padding-left: 15rem;">
           <div
             class="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
           >
-            <div class="mb-10 text-center md:mb-16">Laraveller</div>
+            <div class="mb-10 text-center md:mb-16">Login Page</div>
             <form @submit.prevent="handleLogin">
              
               <div class="mb-6">
