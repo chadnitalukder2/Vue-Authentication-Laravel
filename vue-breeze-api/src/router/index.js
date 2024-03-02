@@ -34,6 +34,16 @@ const routes = [
     name: "all-product",
     component: () => import("../components/product/all_product.vue"),
   },
+  {
+    path: "/all-category",
+    name: "all-category",
+    component: () => import("../components/category/all_category.vue"),
+  },
+  {
+    path: "/all-brand",
+    name: "all-brand",
+    component: () => import("../components/brand/all_brand.vue"),
+  },
 ];
 
 const router = createRouter({
