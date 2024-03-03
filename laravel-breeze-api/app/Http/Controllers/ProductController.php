@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function get_product(){
+
+        // return storage_path() . '/app/public' ;
         $products = Product::orderBy('id', 'desc')->get();
         return response()->json([
             'products' => $products
@@ -26,27 +28,31 @@ class ProductController extends Controller
             'product_img' => 'required|image|mimes:jpeg,png,jpg,gif',
            
         ]);
-        // $imagePath = $request->file('product_img')->store('product_images', 'public');
-        return $request;
-         dd('hello');
-        $newProduct = new Product(); 
-        $newProduct->fill($request->except('product_img'));
+        $imagePath = $request->file('product_img')->store('product_images', 'public');
+        $imagePath =  storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $imagePath );
+      //--------------------------------
+        // $newProduct = new Product(); 
+        // $newProduct->fill($request->except('product_img'));
         
-        $newProduct->image_path = $imagePath;
+        // $newProduct->product_img = $imagePath;
 
-        $newProduct->save();
-        // Product::insert([
-        //     'product_name' => $request->product_name,
-        //     'product_price' => $request->product_price,
-        //     'product_quantity' => $request->product_quantity,
-        //     'category_name' => $request->category_name,
-        //     'brand_name' => $request->brand_name,
-        //     'product_details' => $request->product_details,
-        //     'product_img' =>  ,
-        //     'created_at' => Carbon::now(),
-        // ]);
+        // $newProduct->save();
+        //----------------------
+        Product::insert([
+            'product_name' => $request->product_name,
+            'product_price' => $request->product_price,
+            'product_quantity' => $request->product_quantity,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
+            'product_details' => $request->product_details,
+            'product_img' =>  $imagePath,
+            'created_at' => Carbon::now(),
+        ]);
 
-        return response()->json(['message' => 'Product added successfully']);
+        return response()->json([
+            // 'newProduct' => $newProduct
+            'message' => 'Product added successfully'
+        ]);
     }
 
 

@@ -38,8 +38,10 @@ const getProduct = async () => {
                   
                 </button>
               </div>
-
+              <h1>image</h1>
+              
               <table id="customers">
+       
                 <tr>
                   <th># ID</th>
                   <th>Name</th>
@@ -59,6 +61,8 @@ const getProduct = async () => {
                     <td>{{ item.product_quantity }}</td>
                     <td>{{ item.category_id }}</td>
                     <td>{{ item.brand_id }}</td>
+                    <td><img :src="item.product_img">
+              </td>
                     <td>gvhgvvh</td>
                     <td>yghuhou</td>
                     <td style="color: red; cursor: pointer">
