@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,12 +10,12 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function get_product(){
-
-        // return storage_path() . '/app/public' ;
-        $products = Product::orderBy('id', 'desc')->get();
+        
+        $products = Product::with('category', 'brand')->get();
         return response()->json([
             'products' => $products
         ], 200);
+      
     }
 
     public function add_products(Request $request){

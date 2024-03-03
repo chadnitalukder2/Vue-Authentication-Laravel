@@ -59,8 +59,8 @@ const getProduct = async () => {
                     <td>{{ item.product_name }}</td>
                     <td>{{ item.product_price }}</td>
                     <td>{{ item.product_quantity }}</td>
-                    <td>{{ item.category_id }}</td>
-                    <td>{{ item.brand_id }}</td>
+                    <td>{{ item.category.category_name }}</td>
+                    <td>{{ item.brand.brand_name }}</td>
                     <td><img :src="item.product_img">
               </td>
                     <td>gvhgvvh</td>
