@@ -22,8 +22,8 @@ class ProductFactory extends Factory
             'product_name' => $this->faker->word,
             'product_price' => $this->faker->randomFloat(100, 2000),
             'product_quantity' => $this->faker->numberBetween(1, 100),
-            'brand_id' => Brand::factory(),  // Use BrandFactory to generate a brand_id
-            'category_id' => Category::factory(),  // Use CategoryFactory to generate a category_id
+            'brand_id' =>$this->faker->numberBetween(1, 20),
+            'category_id' => Category::factory(), 
             'product_img' => $this->faker->imageUrl(400, 300, 'food'),
             'product_details' => $this->faker->paragraph,
         ];

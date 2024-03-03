@@ -38,10 +38,15 @@ const addCategory = async () => {
         let data = {
             category_name : categoryInput.value.category_name,
         }
-        let response = await axios.post("/api/add_category",data );
-    //   console.log('response', response.data);
-    categoryInput.value = []
-    router.push('/all-category')
+        await axios.post("/api/add_category",data ).then((response) => {
+          // console.log('response', response)
+          if(response.status == 200){
+            getCategory();
+            categoryInput.value = []
+          }
+
+        })
+  
     };
 //---------------------------------------------------
 </script>

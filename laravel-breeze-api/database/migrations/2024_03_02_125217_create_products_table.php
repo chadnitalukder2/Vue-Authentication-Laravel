@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->integer('product_price');
             $table->integer('product_quantity');
-            $table->string('brand_name');
-            $table->string('category_name');
+            $table->foreignId('brand_id')->references('id')->on('brands');
+            $table->foreignId('category_id')->references('id')->on('categories');
             $table->string('product_img');
             $table->text('product_details');
             $table->timestamps();

@@ -7,6 +7,7 @@ const router = useRouter();
 const category = ref([]);
 const brand = ref([]);
 const form = ref([]);
+const image = ([]);
 //---------------------------------------------------
 onMounted(async () => {
   getCategory();
@@ -26,30 +27,23 @@ const getBrand = async () => {
 };
 //---------------------------------------------------
 const handleFileChange = async (event) => {
-    form.value.product_img = event.target.files[0];
+    image.value = event.target.files[0];
 }
 //---------------------------------------------------
 const addProduct = async () => {
-  let formData = new FormData();
-  formData.append("product_name", form.value.product_name);
-  formData.append("product_price", form.value.product_price);
-  formData.append("product_quantity", form.value.product_quantity);
-  formData.append("category_id", form.value.category_id);
-  formData.append("brand_id", form.value.brand_id);
-  formData.append("product_details", form.value.product_details);
-  formData.append("product_img", form.value.product_img);
+    const formData = new FormData();
+    formData.append('product_name', form.value.product_name);
+    formData.append('product_price', form.value.product_price);
+    formData.append('product_quantity', form.value.product_quantity);
+    formData.append('category_id', form.value.category_id);
+    formData.append('brand_id', form.value.brand_id);
+    formData.append('product_details', form.value.product_details);
+    formData.append('product_img', image.value);
 
-  try {
-    let response = await axios.post("/api/add_products", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log("response", response);
-  } catch (error) {
-    console.error("Error adding product:", error);
-  }
-};
+    console.log({formData});
+    let response = await axios.post('/api/add_products', formData);
+    console.log('response', response);
+}
 
 </script>
 
@@ -81,26 +75,14 @@ const addProduct = async () => {
                             <p style="text-align: left; padding-bottom: 10px">
                                 Product Price:
                             </p>
-                            <input v-model="form.product_price" type="text" placeholder="Product Price" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                            <input v-model="form.product_price" type="number" placeholder="Product Price" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
                         </div>
 
                         <div class="mb-5">
                             <p style="text-align: left; padding-bottom: 10px">
                                 Product Quantity:
                             </p>
-                            <input v-model="form.product_quantity" type="text" placeholder="Product Quantity" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
-                        </div>
-
-                        <div class="mb-5">
-                            <p style="text-align: left; padding-bottom: 10px">
-                                Product Category Name:
-                            </p>
-                            <select v-model="form.category_id" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none">
-                                <option disabled >Select category</option>
-                                <option v-for="item in category" :key="item.id">
-                                    {{ item.category_name }}
-                                </option>
-                            </select>
+                            <input v-model="form.product_quantity" type="number" placeholder="Product Quantity" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
                         </div>
 
                         <div class="mb-5">
@@ -109,8 +91,21 @@ const addProduct = async () => {
                             </p>
                             <select v-model="form.brand_id" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none">
                                 <option disabled>Select brand</option>
-                                <option v-for="item in brand" :key="item.id">
+                                <option v-for="item in brand" :key="item.id" :value="item.id">
                                     {{ item.brand_name }}
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <div class="mb-5">
+                            <p style="text-align: left; padding-bottom: 10px">
+                                 Category Name:
+                            </p>
+                            <select v-model="form.category_id" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none">
+                                <option disabled >Select category</option>
+                                <option v-for="item in category" :key="item.id" :value="item.id">
+                                    {{ item.category_name }}
                                 </option>
                             </select>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -19,25 +20,33 @@ class ProductController extends Controller
             'product_name' => 'required|string',
             'product_price' => 'required|numeric',
             'product_quantity' => 'required|integer',
+            'category_id' => 'required|integer',
+            'brand_id' => 'required|integer',
             'product_details' => 'required|string',
-            // 'product_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'product_img' => 'required|image|mimes:jpeg,png,jpg,gif',
            
         ]);
-        $imagePath = $request->file('product_img')->store('product_images', 'public');
-        $newProduct = Product::insert([
-            'product_name' => $request->input('product_name'),
-            'product_price' => $request->input('product_price'),
-            'product_quantity' => $request->input('product_quantity'),
-            'category_id' => $request->input('category_id'),
-            'brand_id' => $request->input('brand_id'),
-            'product_details' => $request->input('product_details'),
-            'product_img' => $imagePath,
-        ]);
-    
-        return response()->json([
-            'newProduct' => $newProduct,
-            'message' => 'Product added successfully'
-        ]);
+        // $imagePath = $request->file('product_img')->store('product_images', 'public');
+        return $request;
+         dd('hello');
+        $newProduct = new Product(); 
+        $newProduct->fill($request->except('product_img'));
+        
+        $newProduct->image_path = $imagePath;
+
+        $newProduct->save();
+        // Product::insert([
+        //     'product_name' => $request->product_name,
+        //     'product_price' => $request->product_price,
+        //     'product_quantity' => $request->product_quantity,
+        //     'category_name' => $request->category_name,
+        //     'brand_name' => $request->brand_name,
+        //     'product_details' => $request->product_details,
+        //     'product_img' =>  ,
+        //     'created_at' => Carbon::now(),
+        // ]);
+
+        return response()->json(['message' => 'Product added successfully']);
     }
 
 
