@@ -19,8 +19,9 @@ const getCategory = async () => {
 };
 //---------------------------------------------------
 const deleteCategory = (id) => {
-    axios.get(`/api/delete_category/${id}`)
-    router.push('all-category');
+    axios.get(`/api/delete_category/${id}`).then( () => {
+      getCategory();
+    })
 }
 //---------------------------------------------------
 const getToken = async () => {

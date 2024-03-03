@@ -19,8 +19,9 @@ const getBrand = async () => {
 };
 //---------------------------------------------------
 const deleteBrand = (id) => {
-    axios.get(`/api/delete_brand/${id}`)
-    router.push('all-brand');
+    axios.get(`/api/delete_brand/${id}`).then( () => {
+      getBrand();
+    })
 }
 //---------------------------------------------------
 const getToken = async () => {
@@ -38,10 +39,12 @@ const addBrand = async () => {
         let data = {
             brand_name : brandInput.value.brand_name,
         }
-        let response = await axios.post("/api/add_brand",data );
+        await axios.post("/api/add_brand",data ).then( () => {
+          getBrand();
+          brandInput.value = []
+        })
     //   console.log('response', response.data);
-    brandInput.value = []
-    router.push('/all-brand')
+    
     };
 //---------------------------------------------------
 </script>

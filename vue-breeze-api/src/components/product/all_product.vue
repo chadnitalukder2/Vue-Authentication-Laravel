@@ -38,7 +38,6 @@ const getProduct = async () => {
                   
                 </button>
               </div>
-              <h1>image</h1>
               
               <table id="customers">
        
@@ -50,7 +49,6 @@ const getProduct = async () => {
                   <th>Category Name</th>
                   <th>Brand Name</th>
                   <th>Image</th>
-                  <th>Details</th>
                   <th>Action</th>
                 </tr>
                 <tbody v-for="item in products" :key="item.id">
@@ -61,10 +59,10 @@ const getProduct = async () => {
                     <td>{{ item.product_quantity }}</td>
                     <td>{{ item.category.category_name }}</td>
                     <td>{{ item.brand.brand_name }}</td>
-                    <td><img :src="item.product_img">
-              </td>
-                    <td>gvhgvvh</td>
-                    <td>yghuhou</td>
+                    <td>
+                      <img :src="item.product_img" style="width: 70px; height: 50px;">
+                    </td>
+              
                     <td style="color: red; cursor: pointer">
                       <span>Delete</span>
                     </td>
