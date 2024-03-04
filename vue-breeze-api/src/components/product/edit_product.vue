@@ -3,6 +3,8 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
+import { useRoute } from 'vue-router'
+const route = useRoute()
 //---------------------------------------------------
 const category = ref([]);
 const brand = ref([]);
@@ -12,7 +14,19 @@ const image = ([]);
 onMounted(async () => {
   getCategory();
   getBrand();
+  getProduct();
 });
+
+
+//---------------------------------------------------
+const getProduct = async () => {
+    const id = route.params.id;
+    // console.log('routhiuhuunje', id);
+ let response = await axios.get(`/api/edit_product/${id}`);
+    form.value = response.data.product
+    console.log('responseydyhfb', response.data.product);
+}
+
 //---------------------------------------------------
 const getCategory = async () => {
   let response = await axios.get("/api/get_category");
@@ -27,23 +41,10 @@ const getBrand = async () => {
 };
 //---------------------------------------------------
 const handleFileChange = async (event) => {
-    image.value = event.target.files[0];
+    let image = event.target.files[0];
 }
 //---------------------------------------------------
-const addProduct = async () => {
-    const formData = new FormData();
-    formData.append('product_name', form.value.product_name);
-    formData.append('product_price', form.value.product_price);
-    formData.append('product_quantity', form.value.product_quantity);
-    formData.append('category_id', form.value.category_id);
-    formData.append('brand_id', form.value.brand_id);
-    formData.append('product_details', form.value.product_details);
-    formData.append('product_img', image.value);
 
-    console.log({formData});
-    let response = await axios.post('/api/add_products', formData);
-    console.log('response', response);
-}
 
 </script>
 
@@ -61,7 +62,7 @@ const addProduct = async () => {
                 margin-left: 372px;
                 border-radius: 5px;
               ">
-                        Add Product Page
+                        Edit Product Page
                     </div>
                     <form @submit.prevent="addProduct"  enctype="multipart/form-data">
                         <div class="mb-5">
@@ -128,7 +129,7 @@ const addProduct = async () => {
 
                         <div class="mb-5">
                             <button type="submit" class="w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white">
-                                Add Product
+                                Update product
                             </button>
                         </div>
                     </form>

@@ -38,8 +38,9 @@ const getProduct = async () => {
                   
                 </button>
               </div>
-
+              
               <table id="customers">
+       
                 <tr>
                   <th># ID</th>
                   <th>Name</th>
@@ -48,19 +49,20 @@ const getProduct = async () => {
                   <th>Category Name</th>
                   <th>Brand Name</th>
                   <th>Image</th>
-                  <th>Details</th>
                   <th>Action</th>
                 </tr>
                 <tbody v-for="item in products" :key="item.id">
                   <tr>
-                    <td># {{ item.id }}</td>
+                    <td style="color: blue;"><router-link :to="{ name: 'edit-product', params: { id: item.id }}" ># {{ item.id }} </router-link></td>
                     <td>{{ item.product_name }}</td>
                     <td>{{ item.product_price }}</td>
                     <td>{{ item.product_quantity }}</td>
-                    <td>{{ item.category_id }}</td>
-                    <td>{{ item.brand_id }}</td>
-                    <td>gvhgvvh</td>
-                    <td>yghuhou</td>
+                    <td>{{ item.category.category_name }}</td>
+                    <td>{{ item.brand.brand_name }}</td>
+                    <td>
+                      <img :src="item.product_img" style="width: 70px; height: 50px;">
+                    </td>
+              
                     <td style="color: red; cursor: pointer">
                       <span>Delete</span>
                     </td>
