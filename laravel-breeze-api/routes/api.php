@@ -29,7 +29,10 @@ Route::get('/get_brand', [BrandController::class, 'get_brand']);
 Route::get('/delete_brand/{id}', [BrandController::class, 'delete_brand']);
 Route::post('/add_brand', [BrandController::class, 'add_brand']);
 
+
 Route::get('/get_product', [ProductController::class, 'get_product']);
 Route::post('/add_products', [ProductController::class, 'add_products']);
 Route::get('/edit_product/{id}', [ProductController::class, 'edit_product']);
+Route::post('/update_product/{id}', [ProductController::class, 'update_product']);
+
 Route::get('/delete_product/{id}', [ProductController::class, 'delete_product']);

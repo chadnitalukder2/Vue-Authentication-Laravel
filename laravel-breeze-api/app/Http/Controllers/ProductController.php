@@ -68,5 +68,19 @@ class ProductController extends Controller
         ], 200);
     }
 
+    public function update_product(Request $request , $id){
+        $product = Product::where('id', $id)->first();
+    // return $product;
+        $product->update([
+                'product_name' => $request->product_name,
+                'product_price' => $request->product_price,
+                'product_quantity' => $request->product_quantity,
+                // 'brand_id ' => $request->brand_id ,
+                // 'category_id ' => $request->category_id ,
+                'product_details' => $request->product_details,
+        ]);
+      
+    }
+
 
 }
