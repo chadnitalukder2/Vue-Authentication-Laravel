@@ -1,6 +1,9 @@
 <script setup>
 import Nav from './components/Nav.vue';
 import sitebar from './components/sidebar.vue';
+
+
+
 </script>
 
 <template>

@@ -6,10 +6,21 @@ const router = useRouter();
 import { useRoute } from 'vue-router'
 const route = useRoute()
 //---------------------------------------------------
-const category = ref([]);
-const brand = ref([]);
-const form = ref([]);
-const image = ([]);
+const category = ref({
+    category_name: ''
+});
+const brand = ref({
+    brand_name: ''
+});
+const form = ref({
+    product_name: '',
+    product_price: '',
+    product_quantity: '',
+    brand_id : '',
+    category_id : '',
+    product_details: '',
+});
+const image = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
   getCategory();
@@ -24,9 +35,8 @@ const getProduct = async () => {
     // console.log('routhiuhuunje', id);
  let response = await axios.get(`/api/edit_product/${id}`);
     form.value = response.data.product
-    console.log('responseydyhfb', response.data.product);
+    // console.log('responseydyhfb', response.data.product);
 }
-
 //---------------------------------------------------
 const getCategory = async () => {
   let response = await axios.get("/api/get_category");
@@ -41,11 +51,33 @@ const getBrand = async () => {
 };
 //---------------------------------------------------
 const handleFileChange = async (event) => {
-    let image = event.target.files[0];
+    image.value = event.target.files[0];
 }
 //---------------------------------------------------
+const updateProduct = async () => {
+    let id = route.params.id;
+    const formData = new FormData();
+    formData.append('product_name', form.value.product_name);
+    formData.append('product_price', form.value.product_price);
+    formData.append('product_quantity', form.value.product_quantity);
+    formData.append('category_id', form.value.category_id);
+    formData.append('brand_id', form.value.brand_id);
+    formData.append('product_details', form.value.product_details);
+    // formData.append('product_img', image.value);
+    // let formData = {
+    //     'product_name': form.value.product_name,
+    //     'product_price': form.value.product_price,
+    //     'product_quantity': form.value.product_quantity,
+    //     'category_id': form.value.category_id,
+    //     'brand_id': form.value.brand_id,
+    //     'product_details': form.value.product_details,
+    // }
 
+    console.log({formData});
+        let response = await axios.post(`/api/update_product/${id}`, formData);
+        console.log('Response:', response);
 
+}
 </script>
 
 <template>
@@ -64,7 +96,7 @@ const handleFileChange = async (event) => {
               ">
                         Edit Product Page
                     </div>
-                    <form @submit.prevent="addProduct"  enctype="multipart/form-data">
+                    <form @submit.prevent="updateProduct"  enctype="multipart/form-data">
                         <div class="mb-5">
                             <p style="text-align: left; padding-bottom: 10px">
                                 Product Name:

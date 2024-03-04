@@ -19,8 +19,12 @@ const handleLogin = async () => {
   let response = await axios.post("/login", {
     email: form.value.email,
     password: form.value.password,
-  });
-  // console.log('response', response);
+  }).then((res) => {
+    localStorage.setItem("password", form.value.password);
+    localStorage.setItem("email", form.value.email);
+    console.log('res', res);
+  })
+  console.log('response', response);
   
   router.push("/");
 };
