@@ -53,7 +53,7 @@ const getProduct = async () => {
                 </tr>
                 <tbody v-for="item in products" :key="item.id">
                   <tr>
-                    <td># {{ item.id }}</td>
+                    <td style="color: blue;"><router-link :to="{ name: 'edit-product', params: { id: item.id }}" ># {{ item.id }} </router-link></td>
                     <td>{{ item.product_name }}</td>
                     <td>{{ item.product_price }}</td>
                     <td>{{ item.product_quantity }}</td>

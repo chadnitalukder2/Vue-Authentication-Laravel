@@ -31,3 +31,4 @@ Route::post('/add_brand', [BrandController::class, 'add_brand']);
 
 Route::get('/get_product', [ProductController::class, 'get_product']);
 Route::post('/add_products', [ProductController::class, 'add_products']);
+Route::get('/edit_product/{id}', [ProductController::class, 'edit_product']);
