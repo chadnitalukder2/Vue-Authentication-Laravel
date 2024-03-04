@@ -24,7 +24,7 @@ const getProduct = async () => {
     // console.log('routhiuhuunje', id);
  let response = await axios.get(`/api/edit_product/${id}`);
     form.value = response.data.product
-    console.log('responseydyhfb', response.data.product);
+    // console.log('responseydyhfb', response.data.product);
 }
 
 //---------------------------------------------------
@@ -64,7 +64,7 @@ const handleFileChange = async (event) => {
               ">
                         Edit Product Page
                     </div>
-                    <form @submit.prevent="addProduct"  enctype="multipart/form-data">
+                    <form @submit.prevent="upadeProduct"  enctype="multipart/form-data">
                         <div class="mb-5">
                             <p style="text-align: left; padding-bottom: 10px">
                                 Product Name:

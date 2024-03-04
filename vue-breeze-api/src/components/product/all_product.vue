@@ -17,6 +17,12 @@ const getProduct = async () => {
   console.log("response", products.value);
 };
 
+const deleteProduct = (id) => {
+    axios.get(`/api/delete_product/${id}`).then( () => {
+      getProduct();
+    })
+}
+
 
 </script>
 
@@ -63,7 +69,7 @@ const getProduct = async () => {
                       <img :src="item.product_img" style="width: 70px; height: 50px;">
                     </td>
               
-                    <td style="color: red; cursor: pointer">
+                    <td @click="deleteProduct(item.id)" style="color: red; cursor: pointer">
                       <span>Delete</span>
                     </td>
                   </tr>
