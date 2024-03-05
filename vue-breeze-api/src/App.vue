@@ -20,6 +20,7 @@ const getUser = async () => {
 </script>
 
 <template>
+  
 <div>
   <Nav :user="user"></Nav>
   <main class="min-h-full bg-gray-200 flex">
@@ -34,6 +35,7 @@ const getUser = async () => {
         </div>
   </main>
 </div>
+
 </template>
 
 <style scoped>
