@@ -48,6 +48,12 @@ const addProduct = async () => {
 </script>
 
 <template>
+
+</template>
+
+
+
+<style lang="scss" scoped></style>
 <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
     <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
@@ -137,8 +143,3 @@ const addProduct = async () => {
         </div>
     </div>
 </section>
-</template>
-
-
-
-<style lang="scss" scoped></style>
