@@ -54,6 +54,18 @@ const routes = [
     component: () => import("../components/brand/all_brand.vue"),
     meta: { requiresAuth: true },
   },
+  {
+    path: "/all-user",
+    name: "all-user",
+    component: () => import("../components/user/all_user.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/edit-user/:id",
+    name: "edit-user",
+    component: () => import("../components/user/edit_user.vue"),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({
