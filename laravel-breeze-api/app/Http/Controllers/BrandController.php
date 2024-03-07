@@ -35,9 +35,22 @@ class BrandController extends Controller
 
 
     public function add_brand(Request $request){
+        $request->validate([
+            'brand_name' => 'required|string',
+            'brand_img' => 'required|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        $imagePath = $request->file('brand_img')->store('brand_img', 'public');
+        $imagePath = asset('storage/'.$imagePath);
+
         Brand::insert([
             'brand_name' => $request->brand_name,
+            'brand_img' =>  $imagePath,
             'created_at' => Carbon::now(),
+        ]);
+
+        return response()->json([
+            // 'newProduct' => $newProduct
+            'message' => 'Brand added successfully'
         ]);
     }
 

@@ -71,27 +71,26 @@ const addCategory = async () => {
                 <div class="w-full px-4" style="padding-left: 15rem">
                     <div class="relative mx-auto max-w-[850px] overflow-hidden rounded-lg bg-white pt-5 px-10 text-center sm:px-12 md:px-[0px]">
                       <form @submit.prevent="addCategory"  enctype="multipart/form-data"> 
-                      <div class="mb-5" style="padding: 0px 20px">
-                            <p style="text-align: left; padding-bottom: 10px">
-                                Category Name:
-                            </p>
-                            <input v-model="categoryInput.category_name" type="text" placeholder="category Price" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
-                            <p v-if="showError" style="color: red; text-align: left">
-                                Category name is required
-                            </p>
-                        </div>
-                        <div class="mb-5" style="padding: 0px 20px">
-                            <p style="text-align: left; padding-bottom: 10px">
-                                Category Image:
-                            </p>
-                            <input @change="handleFileChange" type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
-                        </div>
-
-                        <div class="mb-5" style="text-align: left; padding: 20px">
-                            <button type="submit" class="px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white">
-                                Add Category
-                            </button>
-                        </div>
+                          <div class="mb-5" style="padding: 0px 20px">
+                              <p style="text-align: left; padding-bottom: 10px">
+                                  Category Name:
+                              </p>
+                              <input v-model="categoryInput.category_name" type="text" placeholder="category Price" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                              <p v-if="showError" style="color: red; text-align: left">
+                                  Category name is required
+                              </p>
+                          </div>
+                          <div class="mb-5" style="padding: 0px 20px">
+                              <p style="text-align: left; padding-bottom: 10px">
+                                  Category Image:
+                              </p>
+                              <input @change="handleFileChange" type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                          </div>
+                          <div class="mb-5" style="text-align: left; padding: 20px">
+                              <button type="submit" class="px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white">
+                                  Add Category
+                              </button>
+                          </div>
                       </form>
                         <table id="customers">
                             <tr>
