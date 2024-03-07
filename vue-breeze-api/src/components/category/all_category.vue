@@ -57,6 +57,7 @@ const addCategory = async () => {
         if (response.status == 200) {
             getCategory();
             categoryInput.value = [];
+            image.value = [];
         }
     });
 };

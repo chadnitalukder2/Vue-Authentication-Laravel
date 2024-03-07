@@ -51,6 +51,7 @@ const addBrand = async () => {
         await axios.post("/api/add_brand",formData ).then( () => {
           getBrand();
           brandInput.value = []
+          image.value = []
         })
     //   console.log('response', response.data);
     
@@ -107,6 +108,9 @@ const addBrand = async () => {
                   <tr >
                     <td># {{ item.id }}</td>
                     <td>{{ item.brand_name }}</td>
+                    <td>
+                      <img :src="item.brand_img" style="width: 70px; height: 50px;">
+                    </td>
                     <td @click="deleteBrand(item.id)" style="color: red; cursor: pointer;" >
                         <span>Delete</span>
                     </td>
