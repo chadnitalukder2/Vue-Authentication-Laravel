@@ -1,7 +1,6 @@
 <template>
-   
 
-   <nav class=" bg-indigo-900 text-white px-2 py-2.5 sm:px-4" style="border-bottom: 1px solid;     position: fixed;
+   <!-- <nav class=" bg-indigo-900 text-white px-2 py-2.5 sm:px-4" style="border-bottom: 1px solid;     position: fixed;
     width: 100%;
     z-index: 99;">
         <div class="container mx-auto flex flex-wrap items-center justify-between" bis_skin_checked="1">
@@ -39,7 +38,37 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
+
+    <ptnav>
+       <div class="ptcontainer">
+        <div class="nav_left">
+            <img src="../assets/img/logo-1-removebg-preview.png">
+        </div>
+        <div class="nav_right">
+           <p>
+            <router-link :to="{ name: 'Home' }" class="block rounded py-2 pr-4 pl-3 text-white" aria-current="page">Home</router-link>
+           </p>
+           <template v-if="!user.user">
+                <p>
+                    <router-link :to="{ name: 'Login' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700">Login</router-link>
+                </p>
+                <p>
+                    <router-link :to="{ name: 'Register' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700 md:border-0">Register</router-link>
+                </p>
+            </template>
+
+            <template v-if="user?.user">
+                <p>
+                    <button @click="handleLogout" >
+                        Logout
+                    </button>
+                </p>
+            </template>
+           
+        </div>
+       </div>
+    </ptnav>
 
 </template>
 
@@ -63,4 +92,43 @@ const handleLogout = async () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.ptcontainer{
+    font-family: poppins, sans-serif;
+    background: #f9ece6;
+    padding: 2px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px 20px 0px 0px;
+    .nav_left{
+        padding: 0px 20px;
+        flex-basis: 50%;
+        img{
+            width: 70px;
+        }
+    }
+    .nav_right{
+        padding:10px 20px;
+        display: flex;
+       p{
+        padding: 0px 10px;
+        font-size: 18px;
+        font-weight: 500;
+        a{
+            text-decoration: none;
+            color: #262525c7;
+           &:hover{
+                color: rgb(203 46 205 / 75%);
+            }
+        }
+        
+
+       }
+    
+    }
+    
+}
+
+</style>
+
+
