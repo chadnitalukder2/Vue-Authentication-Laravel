@@ -76,7 +76,7 @@ const addCategory = async () => {
                               <p style="text-align: left; padding-bottom: 10px">
                                   Category Name:
                               </p>
-                              <input v-model="categoryInput.category_name" type="text" placeholder="category Price" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                              <input v-model="categoryInput.category_name" type="text" placeholder="category name" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
                               <p v-if="showError" style="color: red; text-align: left">
                                   Category name is required
                               </p>
