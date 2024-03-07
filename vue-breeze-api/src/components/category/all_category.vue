@@ -97,11 +97,15 @@ const addCategory = async () => {
                             <tr>
                                 <th># ID</th>
                                 <th>Category Name</th>
+                                <th>Category Image</th>
                                 <th>Action</th>
                             </tr>
                             <tbody v-for="item in category" :key="item.id">
                                 <tr>
                                     <td># {{ item.id }}</td>
+                                    <td>
+                                      <img :src="item.category_img" style="width: 70px; height: 50px;">
+                                    </td>
                                     <td>{{ item.category_name }}</td>
                                     <td @click="deleteCategory(item.id)" style="color: red; cursor: pointer">
                                         <span>Delete</span>
