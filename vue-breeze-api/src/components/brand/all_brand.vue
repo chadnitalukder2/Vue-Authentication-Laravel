@@ -7,10 +7,15 @@ const router = useRouter();
 const brand = ref([]);
 let showError = ref(false);
 const brandInput = ref([]);
+const image = [];
 //---------------------------------------------------
 onMounted(async () => {
   getBrand();
 });
+//---------------------------------------------------
+const handleFileChange = async (event) => {
+    image.value = event.target.files[0];
+};
 //---------------------------------------------------
 const getBrand = async () => {
   let response = await axios.get("/api/get_brand");
@@ -36,12 +41,17 @@ const addBrand = async () => {
             return;
         }
      
-        let data = {
-            brand_name : brandInput.value.brand_name,
-        }
-        await axios.post("/api/add_brand",data ).then( () => {
+        // let data = {
+        //     brand_name : brandInput.value.brand_name,
+        // }
+        const formData = new FormData();
+        formData.append("brand_name", brandInput.value.brand_name);
+        formData.append("brand_img", image.value);
+
+        await axios.post("/api/add_brand",formData ).then( () => {
           getBrand();
           brandInput.value = []
+          image.value = []
         })
     //   console.log('response', response.data);
     
@@ -58,22 +68,49 @@ const addBrand = async () => {
             <div
               class="relative mx-auto max-w-[850px] overflow-hidden rounded-lg bg-white pt-5 px-10 text-center sm:px-12 md:px-[0px]"
             >
-              <div class="search">
+              <!-- <div class="search">
                 <input v-model="brandInput.brand_name" placeholder="add brand name" class="searchbox" />
                 <span class="btn" @click="addBrand()">Add Brand</span>
                 <p v-if="showError" style="color: red;"> Brand name is required </p>
-              </div>
+              </div> -->
+
+              <form @submit.prevent="addBrand"  enctype="multipart/form-data"> 
+                          <div class="mb-5" style="padding: 0px 20px">
+                              <p style="text-align: left; padding-bottom: 10px">
+                                Brand Name:
+                              </p>
+                              <input v-model="brandInput.brand_name" type="text" placeholder="brand name" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                              <p v-if="showError" style="color: red; text-align: left">
+                                Brand name is required
+                              </p>
+                          </div>
+                          <div class="mb-5" style="padding: 0px 20px">
+                              <p style="text-align: left; padding-bottom: 10px">
+                                Brand Image:
+                              </p>
+                              <input @change="handleFileChange" type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+                          </div>
+                          <div class="mb-5" style="text-align: left; padding: 20px">
+                              <button type="submit" class="px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white">
+                                  Add Brand
+                              </button>
+                          </div>
+                      </form>
 
               <table id="customers">
                 <tr>
                   <th># ID</th>
                   <th>Brand Name</th>
+                  <th>Brand Image</th>
                   <th>Action</th>
                 </tr> 
                 <tbody v-for="item in brand" :key="item.id">
                   <tr >
                     <td># {{ item.id }}</td>
                     <td>{{ item.brand_name }}</td>
+                    <td>
+                      <img :src="item.brand_img" style="width: 70px; height: 50px;">
+                    </td>
                     <td @click="deleteBrand(item.id)" style="color: red; cursor: pointer;" >
                         <span>Delete</span>
                     </td>

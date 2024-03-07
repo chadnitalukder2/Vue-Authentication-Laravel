@@ -38,9 +38,22 @@ class CategoryController extends Controller
 
 
     public function add_category(Request $request){
+        $request->validate([
+            'category_name' => 'required|string',
+            'category_img' => 'required|image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $imagePath = $request->file('category_img')->store('category_img', 'public');
+        $imagePath = asset('storage/'.$imagePath);
+
         Category::insert([
             'category_name' => $request->category_name,
+            'category_img' =>  $imagePath,
             'created_at' => Carbon::now(),
+        ]);
+        return response()->json([
+            // 'newProduct' => $newProduct
+            'message' => 'Category added successfully'
         ]);
     }
 

@@ -22,11 +22,8 @@ const handleLogin = async () => {
   }).then((res) => {
     localStorage.setItem("password", form.value.password);
     localStorage.setItem("email", form.value.email);
-    console.log('res', res);
+    window.location.reload();
   })
-  console.log('response', response);
-  
-  router.push("/");
 };
 </script>
 

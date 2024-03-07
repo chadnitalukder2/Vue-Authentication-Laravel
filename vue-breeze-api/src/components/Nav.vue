@@ -21,7 +21,7 @@
                     <li>
                         <router-link :to="{ name: 'Home' }" class="block rounded py-2 pr-4 pl-3 text-white" aria-current="page">Home</router-link>
                     </li>
-                    <template v-if="!user">
+                    <template v-if="!user.user">
                         <li>
                             <router-link :to="{ name: 'Login' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700">Login</router-link>
                         </li>
@@ -29,7 +29,7 @@
                             <router-link :to="{ name: 'Register' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700 md:border-0">Register</router-link>
                         </li>
                     </template>
-                    <template v-if="user">
+                    <template v-if="user?.user">
                         <li>
                             <button @click="handleLogout" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700 md:border-0">
                                 Logout
@@ -56,7 +56,10 @@ const user = defineProps(["user"]);
 
 const handleLogout = async () => {
     await axios.post('/logout');
-    router.push({ name: 'login' });
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    // router.push({ name: 'Login' });
+    window.location.reload();
 };
 </script>
 

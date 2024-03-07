@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function get_product(){
         
-        $products = Product::with('category', 'brand')->get();
+        $products = Product::orderBy('id', 'desc')->with('category', 'brand')->get();
         return response()->json([
             'products' => $products
         ], 200);
@@ -30,7 +30,11 @@ class ProductController extends Controller
            
         ]);
         $imagePath = $request->file('product_img')->store('product_images', 'public');
-        $imagePath =  storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $imagePath );
+        $imagePath = asset('storage/'.$imagePath);
+   
+        
+
+        // $imagePath =  storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $imagePath );
       //--------------------------------
         // $newProduct = new Product(); 
         // $newProduct->fill($request->except('product_img'));
