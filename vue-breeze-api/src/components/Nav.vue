@@ -45,9 +45,6 @@ const handleLogout = async () => {
 </script>
 
 <style lang="scss" scoped>
-html {
-    font-size: 62.5%;
-}
 
 .navbar {
 
