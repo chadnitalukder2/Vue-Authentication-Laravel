@@ -18,6 +18,7 @@ class BrandFactory extends Factory
     {
         return [
             'brand_name' => fake()->name(),
+            'brand_img' => fake()->imageUrl(),
         ];
     }
 }
