@@ -95,11 +95,14 @@ const handleLogout = async () => {
 <style lang="scss" scoped>
 .ptcontainer{
     font-family: poppins, sans-serif;
-    background: #f9ece6;
+    background: #f9ece626;
     padding: 2px 20px;
     display: flex;
     justify-content: space-between;
     border-radius: 20px 20px 0px 0px;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  
+    border-bottom: 1px solid #ddd;
     .nav_left{
         padding: 0px 20px;
         flex-basis: 50%;
@@ -118,7 +121,7 @@ const handleLogout = async () => {
             text-decoration: none;
             color: #262525c7;
            &:hover{
-                color: rgb(203 46 205 / 75%);
+                color: rgba(162, 111, 163, 0.88);
             }
         }
         

@@ -5,37 +5,76 @@
 
 <template>
  <!-- #fdebcb -->
-   
- <section class="bg-[#F4F7FF]">
-    <div class="container mx-auto">
-        <div class="-mx-4 ">
-            <div class="ptheader flex flex-wrap">
-                <div class="left ">
-                    <h4>Best Quality Products</h4>
-                    <h1>We Print What You Want! </h1>
-                    <p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien.</p>
-                </div>
-                    <div class="right">
-                        <img src="../assets/img/3495.jpg_860.jpg">
-                    </div>
-                  </div>
+ <div class="pt_header">
+    <div class="section-header">
+        <div class="left">
+            <img src="../assets/img/slider-1.webp">
+        </div>
+        <div class="right">
+            <h1>Welcome To OurGift Shop</h1>
+            <p>Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim, accusantium perferendis.</p>
+            <button>CONTACT US</button>
         </div>
     </div>
-</section>
-    
+
+</div>
+
 </template>
 
 <style lang="scss" scoped>
-.ptheader{
-    padding-top: 85px;
-    background-image: linear-gradient(to right, rgb(166 66 167 / 36%), rgb(201 173 191 / 57%));
+.pt_header{
     .left{
-        flex-basis: 50%;
-        background-image: linear-gradient(to right, rgb(251 13 132 / 18%), #fdebcb)
+        img{
+            width: 99%;
+            height: 80vh;
+            position: absolute;
+        }
     }
     .right{
-        flex-basis: 50%;
+        position: absolute;
+        width: 50%;
+        height: 80vh;
+        padding:20px 132px 65px 70px;
+        text-align: left;
+        clip-path: polygon(0 0, 71% 0, 100% 155vh, 0 106%);
+        background:  linear-gradient(105deg, rgb(239 234 234 / 48%) 0%, rgba(255, 255, 255, 0.9) 50%);
+        h1{
+            font-size: 62px;
+            color: rgb(162 111 163 / 88%);
+        }
+        p{
+            font-size: 20px;
+            padding: 0px 30px 26px 0px;
+            color: #777;
+        }
+        button{
+            padding: 15px;
+            font-size: 20px;
+            background: rgba(162, 111, 163, 0.88);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #3c3737;
+
+        }
+        
     }
+
 }
+.section-book {
+
+}
+.row {
+    max-width: 114rem;
+    margin: 0 auto;
+}
+.book {
+    background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../assets/img/slider-1.webp);
+    background-size: 100%;
+    height: 60vh;
+    object-fit: cover;
+
+    border-radius: 3px;
+}
+
 
 </style>
