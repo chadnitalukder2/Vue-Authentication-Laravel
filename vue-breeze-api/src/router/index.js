@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "../components/Home.vue";
+import Home from "../Pages/Home/Home.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -49,9 +49,21 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/add-category",
+    name: "add-category",
+    component: () => import("../components/category/add_category.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/all-brand",
     name: "all-brand",
     component: () => import("../components/brand/all_brand.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/add-brand",
+    name: "add-brand",
+    component: () => import("../components/brand/add_brand.vue"),
     meta: { requiresAuth: true },
   },
   {

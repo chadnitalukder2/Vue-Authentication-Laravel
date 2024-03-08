@@ -32,16 +32,15 @@ const deleteProduct = (id) => {
     <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
-          <div class="w-full px-4" style="padding-left: 15rem">
+          <div class="w-full px-4" style="padding-left: 9rem">
             <div
               class="relative mx-auto max-w-[950px] overflow-hidden rounded-lg bg-white pt-5 px-10 text-center sm:px-12 md:px-[0px]"
             >
-              <div style="text-align: right; padding-bottom: 20px; padding-right: 20px;">
-                <button style="border-radius: 5px; padding: 10px; border: 1px solid #ddd; color: white; background:  rgb(49 46 129 / var(--tw-bg-opacity));" >
+              <div >
+                <button  >
                   <router-link :to="{ name: 'add-product' }" >
                     Add Product
                   </router-link>
-                  
                 </button>
               </div>
               
@@ -106,7 +105,7 @@ const deleteProduct = (id) => {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
-  background-color: rgb(49 46 129 / var(--tw-bg-opacity));
-  color: white;
+  background-color: #D1EAE4;
+  color: #444;
 }
 </style>

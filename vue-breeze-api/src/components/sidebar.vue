@@ -1,40 +1,46 @@
 <template>
-    <div>
-        <div class="w-[200px] h-full transition-all bg-indigo-900 text-white py-4 px-2 display-flex" style="position: fixed;    padding-top: 6rem;">
-        <router-link :to="{ name: 'all-category' }" class="flex items-center p-2 rounded transition-colors hover:bg-black/30">
-            <span class="mr-2 text-gray-300">
-                <!-- <HomeIcon class="w-5"/> -->
-            </span>
-            <span class="block rounded py-2 pr-4 pl-3 text-white"> Category </span>
-        </router-link>
-        <router-link :to="{ name: 'all-brand' }" class="flex items-center p-2 rounded transition-colors hover:bg-black/30">
-            <span class="mr-2 text-gray-300">
-                <!-- <HomeIcon class="w-5"/> -->
-            </span>
-            <span class="block rounded py-2 pr-4 pl-3 text-white"> Brand</span>
-        </router-link>
-        
-        <router-link :to="{ name: 'all-product' }" class="flex items-center p-2 rounded transition-colors hover:bg-black/30">
-            <span class="mr-2 text-gray-300">
-                <!-- <HomeIcon class="w-5"/> -->
-            </span>
-            <span class="block rounded py-2 pr-4 pl-3 text-white"> Product </span>
-        </router-link>
-        <router-link :to="{ name: 'all-user' }" class="flex items-center p-2 rounded transition-colors hover:bg-black/30">
-            <span class="mr-2 text-gray-300">
-                <!-- <HomeIcon class="w-5"/> -->
-            </span>
-            <span class="block rounded py-2 pr-4 pl-3 text-white">User </span>
-        </router-link>
-      
-    </div>
+    <div class="side-bar-wrapper">
+        <router-link class="active" :to="{ name: 'all-category' }">All Category</router-link>
+        <router-link :to="{ name: 'all-product' }">All Product</router-link>
+        <router-link :to="{ name: 'all-brand' }">All Brand</router-link>
+        <router-link :to="{ name: 'all-user' }">All User</router-link>
     </div>
 </template>
 
 <script setup>
+// import { defineProps } from 'vue'
+
+// const props = defineProps({
+//   user: String
+// })
 
 </script>
 
 <style lang="scss" scoped>
+
+.side-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    align-items: center;
+    gap: 10px;
+    border-right: 1px solid #EAECF0;
+    height: 100vh;
+    background: #D1EAE4;
+    padding: 60px 0px;
+    a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 18px;
+        padding: 10px 15px;
+        width: calc(100% - 30px);
+        color: #444;
+        &.active {
+            background: #189877;
+            color: #fff;
+        }
+    }
+}
+
 
 </style>

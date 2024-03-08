@@ -12,10 +12,7 @@ const image = [];
 onMounted(async () => {
   getBrand();
 });
-//---------------------------------------------------
-const handleFileChange = async (event) => {
-    image.value = event.target.files[0];
-};
+
 //---------------------------------------------------
 const getBrand = async () => {
   let response = await axios.get("/api/get_brand");
@@ -32,30 +29,7 @@ const deleteBrand = (id) => {
 const getToken = async () => {
   await axios.get("sanctum/csrf-cookie");
 };
-//---------------------------------------------------
-const addBrand = async () => {
-        showError.value = false;
-        if (!brandInput.value.brand_name ) {
-            showError.value = true;
-            // console.log("hi");
-            return;
-        }
-     
-        // let data = {
-        //     brand_name : brandInput.value.brand_name,
-        // }
-        const formData = new FormData();
-        formData.append("brand_name", brandInput.value.brand_name);
-        formData.append("brand_img", image.value);
 
-        await axios.post("/api/add_brand",formData ).then( () => {
-          getBrand();
-          brandInput.value = []
-          image.value = []
-        })
-    //   console.log('response', response.data);
-    
-    };
 //---------------------------------------------------
 </script>
 
@@ -74,28 +48,25 @@ const addBrand = async () => {
                 <p v-if="showError" style="color: red;"> Brand name is required </p>
               </div> -->
 
-              <form @submit.prevent="addBrand"  enctype="multipart/form-data"> 
-                          <div class="mb-5" style="padding: 0px 20px">
-                              <p style="text-align: left; padding-bottom: 10px">
-                                Brand Name:
-                              </p>
-                              <input v-model="brandInput.brand_name" type="text" placeholder="brand name" class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
-                              <p v-if="showError" style="color: red; text-align: left">
-                                Brand name is required
-                              </p>
-                          </div>
-                          <div class="mb-5" style="padding: 0px 20px">
-                              <p style="text-align: left; padding-bottom: 10px">
-                                Brand Image:
-                              </p>
-                              <input @change="handleFileChange" type="file" placeholder="Product Image" class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
-                          </div>
-                          <div class="mb-5" style="text-align: left; padding: 20px">
-                              <button type="submit" class="px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white">
-                                  Add Brand
-                              </button>
-                          </div>
-                      </form>
+              
+
+               <div style="
+                  text-align: right;
+                  padding-bottom: 20px;
+                  padding-right: 20px;
+                ">
+                            <button style="
+                    border-radius: 5px;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    color: white;
+                    background: rgb(49 46 129 / var(--tw-bg-opacity));
+                  ">
+                                <router-link :to="{ name: 'add-brand' }">
+                                    Add brand
+                                </router-link>
+                            </button>
+                        </div>
 
               <table id="customers">
                 <tr>
@@ -125,22 +96,8 @@ const addBrand = async () => {
   </div>
 </template>
 
-<style scoped>
-.search {
-  text-align: left;
-  padding: 10px 20px 30px 20px;
-}
-.btn {
-  border: 1px solid #ddd;
-  padding: 10px;
-  cursor: pointer;
-}
-.searchbox {
-  border: 1px solid #ddd;
-  padding: 9px;
-  width: 85%;
-  border-radius: 5px 2px 0px 5px;
-}
+<style lang="scss" scoped>
+
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -163,7 +120,7 @@ const addBrand = async () => {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
-  background-color: rgb(49 46 129 / var(--tw-bg-opacity));
-  color: white;
+  background-color: #D1EAE4;
+  color: #444;
 }
 </style>
