@@ -1,74 +1,26 @@
 <template>
-
-   <!-- <nav class=" bg-indigo-900 text-white px-2 py-2.5 sm:px-4" style="border-bottom: 1px solid;     position: fixed;
-    width: 100%;
-    z-index: 99;">
-        <div class="container mx-auto flex flex-wrap items-center justify-between" bis_skin_checked="1">
-            <a href="https://laraveller.com/" class="flex items-center">
-                Laraveller
-            </a>
-            <button data-collapse-toggle="navbar-default" type="button" class="ml-3 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden" aria-controls="navbar-default" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
-                <svg class="h-6 w-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                </svg>
-            </button>
-            <p>{{ user?.user }}</p>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default" bis_skin_checked="1">
-                <ul class="mt-4 flex flex-col rounded-lg p-4 md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium">
-                  
-                    <li>
-                        <router-link :to="{ name: 'Home' }" class="block rounded py-2 pr-4 pl-3 text-white" aria-current="page">Home</router-link>
-                    </li>
-                    <template v-if="!user.user">
-                        <li>
-                            <router-link :to="{ name: 'Login' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700">Login</router-link>
-                        </li>
-                        <li>
-                            <router-link :to="{ name: 'Register' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700 md:border-0">Register</router-link>
-                        </li>
-                    </template>
-                    <template v-if="user?.user">
-                        <li>
-                            <button @click="handleLogout" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700 md:border-0">
-                                Logout
-                            </button>
-                        </li>
-                    </template>
-                </ul>
+    <nav class="navbar">
+        <div class="navbar-container container">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
             </div>
-        </div>
-    </nav> -->
+            <ul class="menu-items">
+                <li><router-link :to="{ name: 'Home' }">Home</router-link></li>
+                <li v-if="!user?.user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
+                <li v-if="!user?.user"><router-link :to="{ name: 'Register' }">Register</router-link></li>
+                <li v-if="user?.user">
 
-    <ptnav>
-       <div class="ptcontainer">
-        <div class="nav_left">
-            <img src="../assets/img/logo-1-removebg-preview.png">
-        </div>
-        <div class="nav_right">
-           <p>
-            <router-link :to="{ name: 'Home' }" class="block rounded py-2 pr-4 pl-3 text-white" aria-current="page">Home</router-link>
-           </p>
-           <template v-if="!user.user">
-                <p>
-                    <router-link :to="{ name: 'Login' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700">Login</router-link>
-                </p>
-                <p>
-                    <router-link :to="{ name: 'Register' }" class="block rounded py-2 pr-4 pl-3 text-gray-50 hover:bg-gray-700 md:border-0">Register</router-link>
-                </p>
-            </template>
-
-            <template v-if="user?.user">
-                <p>
-                    <button @click="handleLogout" >
+                    <button @click="handleLogout">
                         Logout
                     </button>
-                </p>
-            </template>
-           
+                </li>
+            </ul>
+            <h1 class="logo">Navbar</h1>
         </div>
-       </div>
-    </ptnav>
+    </nav>
 
 </template>
 
@@ -93,42 +45,206 @@ const handleLogout = async () => {
 </script>
 
 <style lang="scss" scoped>
-.ptcontainer{
-    font-family: poppins, sans-serif;
-    background: #f9ece6;
-    padding: 2px 20px;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 20px 20px 0px 0px;
-    .nav_left{
-        padding: 0px 20px;
-        flex-basis: 50%;
-        img{
-            width: 70px;
-        }
-    }
-    .nav_right{
-        padding:10px 20px;
-        display: flex;
-       p{
-        padding: 0px 10px;
-        font-size: 18px;
-        font-weight: 500;
-        a{
-            text-decoration: none;
-            color: #262525c7;
-           &:hover{
-                color: rgb(203 46 205 / 75%);
-            }
-        }
-        
-
-       }
-    
-    }
-    
+html {
+    font-size: 62.5%;
 }
 
+.navbar {
+
+    input[type="checkbox"],
+    .hamburger-lines {
+        display: none;
+    }
+
+    box-shadow: 0px 2px 7px 0px #EAECF0;
+    /* border-bottom: 1px solid #aaaaaaa1; */
+    background: #D1EAE4;
+    color: #000;
+
+    a {
+        color: #444;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+            color: #117964;
+        }
+    }
+
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        height: 64px;
+        align-items: center;
+
+        .menu-items {
+            order: 2;
+            display: flex;
+        }
+
+        .logo {
+            order: 1;
+            font-size: 2.3rem;
+        }
+    }
+
+    .menu-items {
+        background: #D1EAE4;
+
+        li {
+            list-style: none;
+            margin-left: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: 1px solid #8080803b;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 36px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-top: -10px;
+        }
+
+        button:hover {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+        }
+    }
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        opacity: 0.95;
+
+        .navbar-container {
+
+            input[type="checkbox"],
+            .hamburger-lines {
+                display: block;
+            }
+
+            display: block;
+            position: relative;
+            height: 64px;
+
+            input[type="checkbox"] {
+                position: absolute;
+                display: block;
+                height: 32px;
+                width: 30px;
+                top: 20px;
+                left: 20px;
+                z-index: 5;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .hamburger-lines {
+                display: block;
+                height: 28px;
+                width: 35px;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .line {
+                    display: block;
+                    height: 4px;
+                    width: 100%;
+                    border-radius: 10px;
+                    background: #333;
+                }
+
+                .line1 {
+                    transform-origin: 0% 0%;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                .line2 {
+                    transition: transform 0.2s ease-in-out;
+                }
+
+                .line3 {
+                    transform-origin: 0% 100%;
+                    transition: transform 0.3s ease-in-out;
+                }
+            }
+
+            .menu-items {
+                background: #D1EAE4;
+                padding-top: 100px;
+                margin-top: 0px;
+                height: 100vh;
+                max-width: 300px;
+                transform: translate(-150%);
+                display: flex;
+                flex-direction: column;
+                margin-left: -40px;
+                padding-left: 40px;
+                transition: transform 0.5s ease-in-out;
+                box-shadow: 5px 0px 10px 0px #aaa;
+                overflow: scroll;
+
+                li {
+                    margin-bottom: 1.8rem;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                }
+            }
+
+            .logo {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 2.5rem;
+                margin: 0;
+            }
+
+            input[type="checkbox"]:checked {
+                ~.menu-items {
+                    transform: translateX(0);
+                }
+
+                ~.hamburger-lines {
+                    .line1 {
+                        transform: rotate(45deg);
+                    }
+
+                    .line2 {
+                        transform: scaleY(0);
+                    }
+
+                    .line3 {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar-container {
+        input[type="checkbox"]:checked {
+            ~.logo {
+                display: none;
+            }
+        }
+    }
+}
 </style>
-
-
