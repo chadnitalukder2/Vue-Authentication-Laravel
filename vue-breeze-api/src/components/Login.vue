@@ -94,8 +94,8 @@ const handleLogin = async () => {
   </div> -->
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input  v-model="form.email"  type="text" placeholder="Enter Username" name="uname" required>
+      <label for="uname"><b>User Email</b></label>
+      <input  v-model="form.email"  type="text" placeholder="Enter User Email" name="uname" required>
 
       <label for="psw"><b>Password</b></label>
       <input v-model="form.password" type="password" placeholder="Enter Password" name="psw" required>

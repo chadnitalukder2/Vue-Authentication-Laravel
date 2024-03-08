@@ -81,14 +81,14 @@ const getToken = async () => {
     button{
         padding: 10px 20px;
          border: 1px solid #ddd;
-         background: #d1eae4;
+         background: #189877;
          border-radius: 6px;
          cursor: pointer;
          a{
             text-decoration: none;
             font-size: 16px;
             font-weight: 500;
-            color: #444;
+            color: #fff;
          }
     
     }
