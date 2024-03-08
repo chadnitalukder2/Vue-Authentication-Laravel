@@ -60,21 +60,6 @@
     }
 
 }
-.section-book {
-
-}
-.row {
-    max-width: 114rem;
-    margin: 0 auto;
-}
-.book {
-    background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../assets/img/slider-1.webp);
-    background-size: 100%;
-    height: 60vh;
-    object-fit: cover;
-
-    border-radius: 3px;
-}
 
 
 </style>
