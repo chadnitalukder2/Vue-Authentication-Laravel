@@ -35,68 +35,65 @@ const getToken = async () => {
 
 <template>
   <div>
-    <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
-      <div class="container mx-auto">
-        <div class="-mx-4 flex flex-wrap">
-          <div class="w-full px-4" style="padding-left: 15rem">
-            <div
-              class="relative mx-auto max-w-[850px] overflow-hidden rounded-lg bg-white pt-5 px-10 text-center sm:px-12 md:px-[0px]"
-            >
-              <!-- <div class="search">
-                <input v-model="brandInput.brand_name" placeholder="add brand name" class="searchbox" />
-                <span class="btn" @click="addBrand()">Add Brand</span>
-                <p v-if="showError" style="color: red;"> Brand name is required </p>
-              </div> -->
+      <div class="brand">
 
-              
-
-               <div style="
-                  text-align: right;
-                  padding-bottom: 20px;
-                  padding-right: 20px;
-                ">
-                            <button style="
-                    border-radius: 5px;
-                    padding: 10px;
-                    border: 1px solid #ddd;
-                    color: white;
-                    background: rgb(49 46 129 / var(--tw-bg-opacity));
-                  ">
-                                <router-link :to="{ name: 'add-brand' }">
-                                    Add brand
-                                </router-link>
-                            </button>
-                        </div>
-
-              <table id="customers">
-                <tr>
-                  <th># ID</th>
-                  <th>Brand Name</th>
-                  <th>Brand Image</th>
-                  <th>Action</th>
-                </tr> 
-                <tbody v-for="item in brand" :key="item.id">
-                  <tr >
-                    <td># {{ item.id }}</td>
-                    <td>{{ item.brand_name }}</td>
-                    <td>
-                      <img :src="item.brand_img" style="width: 70px; height: 50px;">
-                    </td>
-                    <td @click="deleteBrand(item.id)" style="color: red; cursor: pointer;" >
-                        <span>Delete</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="btn">
+            <button >
+                <router-link :to="{ name: 'add-brand' }">
+                    Add brand
+                </router-link>
+            </button>
         </div>
+        <table id="customers">
+          <tr>
+            <th># ID</th>
+            <th>Brand Name</th>
+            <th>Brand Image</th>
+            <th>Action</th>
+          </tr> 
+          <tbody v-for="item in brand" :key="item.id">
+            <tr >
+              <td># {{ item.id }}</td>
+              <td>{{ item.brand_name }}</td>
+              <td>
+                <img :src="item.brand_img" style="width: 70px; height: 50px;">
+              </td>
+              <td @click="deleteBrand(item.id)" style="color: red; cursor: pointer;" >
+                  <span>Delete</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
-    </section>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.brand {
+  width: 109%;
+  padding-left: 15rem;
+  padding-top: 50px;
+
+  .btn{
+    text-align: right;
+    padding-bottom: 25px;
+    button{
+        padding: 10px 20px;
+         border: 1px solid #ddd;
+         background: #d1eae4;
+         border-radius: 6px;
+         cursor: pointer;
+         a{
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #444;
+         }
+    
+    }
+  }
+}
 
 #customers {
   font-family: Arial, Helvetica, sans-serif;
@@ -108,7 +105,7 @@ const getToken = async () => {
 #customers th {
   border: 1px solid #ddd;
   padding: 6px 8px;
-  text-align: left;
+  text-align: center;
 }
 
 #customers tr:nth-child(even) {
@@ -119,7 +116,7 @@ const getToken = async () => {
 #customers th {
   padding-top: 10px;
   padding-bottom: 10px;
-  text-align: left;
+  text-align: center;
   background-color: #D1EAE4;
   color: #444;
 }

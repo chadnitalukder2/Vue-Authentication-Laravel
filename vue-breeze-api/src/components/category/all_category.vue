@@ -33,28 +33,11 @@ const getToken = async () => {
 
 <template>
   <div>
-    <!-- <div class="container mx-auto">
-            <div class="-mx-4 flex flex-wrap">
-                <div class="w-full px-4" style="padding-left: 15rem">
-                    <div class="relative mx-auto max-w-[850px] overflow-hidden rounded-lg bg-white pt-5 px-10 text-center sm:px-12 md:px-[0px]">
-                        <div >
-                            <button s>
-                                <router-link :to="{ name: 'add-category' }">
-                                    Add Product
-                                </router-link>
-                            </button>
-                        </div>
-                      
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
     <div class="category">
       <div class="btn">
         <button  >
           <router-link :to="{ name: 'add-category' }">
-            Add Product
+            Add Category
           </router-link>
         </button>
       </div>

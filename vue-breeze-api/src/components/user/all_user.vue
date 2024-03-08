@@ -29,43 +29,35 @@ const deleteUser = (id) => {
 
 <template>
   <div>
-    <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
-      <div class="container mx-auto">
-        <div class="-mx-4 flex flex-wrap">
-          <div class="w-full px-4" style="padding-left: 15rem">
-            <div
-              class="relative mx-auto max-w-[850px] overflow-hidden rounded-lg bg-white pt-5 px-10 text-center sm:px-12 md:px-[0px]"
-            >
-             
-
-              <table id="customers">
-                <tr>
-                  <th># ID</th>
-                  <th>User Name</th>
-                  <th>User Email</th>
-                  <th>Action</th>
-                </tr> 
-                <tbody v-for="item in user" :key="item.id">
-                  <tr >
-                    <td style="color: blue;"><router-link :to="{ name: 'edit-user', params: { id: item.id }}" ># {{ item.id }} </router-link></td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.email  }}</td>
-                    <td @click="deleteUser(item.id)" style="color: red; cursor: pointer;" >
-                        <span>Delete</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="user">
+          <table id="customers">
+            <tr>
+              <th># ID</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>Action</th>
+            </tr> 
+            <tbody v-for="item in user" :key="item.id">
+              <tr >
+                <td style="color: blue;"><router-link :to="{ name: 'edit-user', params: { id: item.id }}" ># {{ item.id }} </router-link></td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email  }}</td>
+                <td @click="deleteUser(item.id)" style="color: red; cursor: pointer;" >
+                    <span>Delete</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </section>
   </div>
 </template>
 
 <style scoped>
-
+.user {
+  width: 109%;
+  padding-left: 14rem;
+  padding-top: 50px;
+}
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -76,7 +68,7 @@ const deleteUser = (id) => {
 #customers th {
   border: 1px solid #ddd;
   padding: 6px 8px;
-  text-align: left;
+  text-align: center;
 }
 
 #customers tr:nth-child(even) {
@@ -87,8 +79,8 @@ const deleteUser = (id) => {
 #customers th {
   padding-top: 10px;
   padding-bottom: 10px;
-  text-align: left;
-  background-color: rgb(49 46 129 / var(--tw-bg-opacity));
-  color: white;
+  text-align: center;
+  background-color: #D1EAE4;
+  color: #444;
 }
 </style>
