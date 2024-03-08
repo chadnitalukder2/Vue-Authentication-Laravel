@@ -160,7 +160,6 @@ video {
 
 .banner {
    &-column {
-      position: relative;
       display: grid;
       align-items: center;
       row-gap: 3rem;
