@@ -100,8 +100,6 @@ const handleLogout = async () => {
     display: flex;
     justify-content: space-between;
     border-radius: 20px 20px 0px 0px;
-    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
-  
     border-bottom: 1px solid #ddd;
     .nav_left{
         padding: 0px 20px;
