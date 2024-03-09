@@ -2,6 +2,7 @@
 <script setup>
 import Hero from './Hero.vue'
 import Card from "./Product_card.vue";
+import Brand_card from './Brand_card.vue';
 import Category_card from './Category_card.vue';
 
 import { ref, onMounted } from "vue";
@@ -9,7 +10,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-const form =ref([]);
+//============================================
 const products = ref([]);
 
 onMounted(async () => {
@@ -21,28 +22,62 @@ const getProduct = async () => {
   products.value = response.data.products;
   console.log("response", products.value);
 };
+//=====================================
+const category = ref([]);
+//---------------------------------------------------
+onMounted(async () => {
+  getCategory();
+});
+//---------------------------------------------------
+
+//---------------------------------------------------
+const getCategory = async () => {
+  let response = await axios.get("/api/get_category");
+  category.value = response.data.category;
+  // console.log("response", category.value);
+};
+//======================================================
+const brand = ref([]);
+//---------------------------------------------------
+onMounted(async () => {
+  getBrand();
+});
+//---------------------------------------------------
+const getBrand = async () => {
+  let response = await axios.get("/api/get_brand");
+  brand.value = response.data.brand;
+  // console.log("response", category.value);
+};
+//=====================================
 </script>
 
 <template>
  <!-- #fdebcb -->
  <div class="container" style="width: 100%;">
     <Hero />
-    <h4 class="product-title"> CATEGORY </h4>
-    <div class="product-wrapper">
-        <Category_card />
-        <Category_card />
-        <Category_card />
-        <Category_card />
-        <Category_card />
-       
+    <div>
+        <h4 class="product-title"> CATEGORY </h4>
+        <div class="product-wrapper">
+            <Category_card v-for="category in category" :key="category.id" :category="category"/>
+        </div>
     </div>
 
-    <h4 class="product-title">All PRODUCTS</h4>
-    <div class="product-wrapper">
-
-        <Card  v-for="product in products" :key="product.id" :product="product"/>
-      
+    <div>
+        <h4 class="product-title"> BRAND </h4>
+        <div class="product-wrapper">
+            <Brand_card v-for="brand in brand " :key="brand.id" :brand="brand"/>
+        </div>
     </div>
+
+    <div>
+        <h4 class="product-title">All PRODUCTS</h4>
+        <div class="product-wrapper">
+
+            <Card  v-for="product in products" :key="product.id" :product="product"/>
+        
+        </div>
+    </div>
+    
 
   
 

@@ -10,17 +10,16 @@ const props = defineProps(["product"]);
 <template>
    
     <div class="product-card">
-        {{ props }}
         <div class="badge">Hot</div>
         <div class="product-tumb">
             <img :src=" props.product.product_img" alt="">
         </div>
         <div class="product-details">
             <span class="product-catagory">{{ props.product.brand.brand_name  }}, {{ props.product.category.category_name }}</span>
-            <h4><a href="">Women leather bag</a></h4>
+            <h4><a href="">{{ props.product.product_name }}</a></h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
             <div class="product-bottom-details">
-                <div class="product-price"><small>$96.00</small>$230.99</div>
+                <div class="product-price"> ${{ props.product.product_price }}</div>
                 <div class="product-links">
                     <a href=""><i class="fa fa-heart"></i></a>
                     <a href=""><i class="fa fa-shopping-cart"></i></a>
@@ -107,7 +106,7 @@ a {
 }
 
 .product-details h4 a:hover {
-    color: #fbb72c;
+    color: #009688;
 }
 
 .product-details p {
@@ -130,7 +129,7 @@ a {
 
 .product-price {
     font-size: 18px;
-    color: #fbb72c;
+    color: #009688;
     font-weight: 600;
 }
 

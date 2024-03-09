@@ -1,12 +1,13 @@
 <template>
     <div>
+          
               <div class="card_categories">
         
                <div class="card-categories-image">
-                  <img class="image" :src=" props.category.category_img" alt="Blouses Shirts">
+                  <img class="image" :src="props.brand.brand_img" alt="Blouses Shirts">
                </div>
               <div class="card_title">
-                <h4>{{ props.category.category_name }}</h4>
+                <h4>{{ props.brand.brand_name  }}</h4>
                 <span >
                   <a href="#">  READ MORE </a>
                 </span>
@@ -23,7 +24,7 @@ import {
     defineProps
 } from "vue";
 
-const props = defineProps(["category"]);
+const props = defineProps(["brand"]);
 </script>
 
 <style lang="scss" scoped>

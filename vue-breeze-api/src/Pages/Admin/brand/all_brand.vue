@@ -5,14 +5,10 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 //---------------------------------------------------
 const brand = ref([]);
-let showError = ref(false);
-const brandInput = ref([]);
-const image = [];
 //---------------------------------------------------
 onMounted(async () => {
   getBrand();
 });
-
 //---------------------------------------------------
 const getBrand = async () => {
   let response = await axios.get("/api/get_brand");
