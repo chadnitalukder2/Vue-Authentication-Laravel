@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../Pages/Home/Home.vue";
+import Admin from "../Pages/Admin/Index.vue"
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -23,24 +24,6 @@ const routes = [
     path: "/password-reset/:token",
     name: "ResetPassword",
     component: () => import("../components/ResetPassword.vue"),
-  },
-  {
-    path: "/add-product",
-    name: "add-product",
-    component: () => import("../components/product/add_product.vue"),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/all-product",
-    name: "all-product",
-    component: () => import("../components/product/all_product.vue"),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/edit-product/:id',
-    name : 'edit-product',
-    component: () => import("../components/product/edit_product.vue"),
-    meta: { requiresAuth: true },
   },
   {
     path: "/all-category",
@@ -78,6 +61,30 @@ const routes = [
     component: () => import("../components/user/edit_user.vue"),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/',
+    component: Admin,
+    children: [
+      {
+        path: "add-product",
+        name: "add-product",
+        component: () => import("../Pages/Admin/product/add_product.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "all-product",
+        name: "all-product",
+        component: () => import("../Pages/Admin/product/all_product.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: 'edit-product/:id',
+        name : 'edit-product',
+        component: () => import("../Pages/Admin/product/edit_product.vue"),
+        meta: { requiresAuth: true },
+      },
+    ],
+  }
 ];
 
 const router = createRouter({

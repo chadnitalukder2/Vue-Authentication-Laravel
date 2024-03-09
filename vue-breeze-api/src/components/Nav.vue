@@ -36,9 +36,9 @@ import {
 const user = defineProps(["user"]);
 
 const handleLogout = async () => {
-    await axios.post('/logout');
     localStorage.removeItem('email');
     localStorage.removeItem('password');
+    await axios.post('/logout');
     // router.push({ name: 'Login' });
     window.location.reload();
 };

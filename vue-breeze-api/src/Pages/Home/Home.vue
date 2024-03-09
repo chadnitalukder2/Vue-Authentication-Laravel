@@ -1,7 +1,7 @@
 
 <script setup>
 import Hero from './Hero.vue'
-import Card from "../../components/product/Card.vue";
+import Card from "../../Pages/Admin/product/Card.vue";
 </script>
 
 <template>
