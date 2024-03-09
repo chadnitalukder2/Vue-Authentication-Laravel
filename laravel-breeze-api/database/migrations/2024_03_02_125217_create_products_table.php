@@ -21,7 +21,10 @@ return new class extends Migration
             $table->foreignId('brand_id')->references('id')->on('brands');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->string('product_img');
-            $table->text('product_details');
+            $table->string('product_sizes')->nullable();
+            $table->string('product_colors')->nullable();
+            $table->text('short_description')->nullable();
+            $table->text('product_details')->nullable();
             $table->timestamps();
         });
     }

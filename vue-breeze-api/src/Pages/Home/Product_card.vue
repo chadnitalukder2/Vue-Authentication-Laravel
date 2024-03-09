@@ -1,11 +1,22 @@
+<script setup>
+import {
+    defineProps
+} from "vue";
+
+const props = defineProps(["product"]);
+
+</script>
+
 <template>
+   
     <div class="product-card">
+        {{ props }}
         <div class="badge">Hot</div>
         <div class="product-tumb">
-            <img src="https://i.imgur.com/xdbHo4E.png" alt="">
+            <img :src=" props.product.product_img" alt="">
         </div>
         <div class="product-details">
-            <span class="product-catagory">Women,bag</span>
+            <span class="product-catagory">{{ props.product.brand.brand_name  }}, {{ props.product.category.category_name }}</span>
             <h4><a href="">Women leather bag</a></h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
             <div class="product-bottom-details">
