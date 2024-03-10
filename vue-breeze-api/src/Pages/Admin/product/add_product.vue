@@ -45,6 +45,8 @@ const addProduct = async () => {
     formData.append('category_id', form.value.category_id);
     formData.append('brand_id', form.value.brand_id);
     formData.append('product_details', form.value.product_details);
+    formData.append('product_colors', JSON.stringify(selectedColors.value));
+    formData.append('product_sizes', JSON.stringify(selectedSizes.value));
     formData.append('product_img', image.value);
 
     console.log({formData});
