@@ -103,6 +103,7 @@ const getBrand = async () => {
     flex-wrap: wrap;
     gap: 20px;
     padding: 40px;
+    justify-content: center;
 }
 
 </style>

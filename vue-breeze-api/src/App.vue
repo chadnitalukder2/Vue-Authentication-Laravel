@@ -21,9 +21,9 @@ const getUser = async () => {
 <template>
   
 <div>
+
   <Nav :user="user"></Nav>
   <main style="display: flex; width: 100%;">
-
       <router-view></router-view>
   </main>
 </div>

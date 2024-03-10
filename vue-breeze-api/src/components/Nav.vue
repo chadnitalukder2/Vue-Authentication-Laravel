@@ -7,11 +7,12 @@
                 <span class="line line2"></span>
                 <span class="line line3"></span>
             </div>
+
             <ul class="menu-items">
                 <li><router-link :to="{ name: 'Home' }">Home</router-link></li>
-                <li v-if="!user?.user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
-                <li v-if="!user?.user"><router-link :to="{ name: 'Register' }">Register</router-link></li>
-                <li v-if="user?.user">
+                <li v-if="!state.loggedIn"><router-link :to="{ name: 'Login' }">Login</router-link></li>
+                <li v-if="!state.loggedIn"><router-link :to="{ name: 'Register' }">Register</router-link></li>
+                <li v-if="state.loggedIn">
 
                     <button @click="handleLogout">
                         Logout
@@ -25,6 +26,7 @@
 </template>
 
 <script setup>
+import { computed, onMounted, reactive } from 'vue';
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -33,18 +35,31 @@ import {
     defineProps
 } from "vue";
 
-const user = defineProps(["user"]);
+const state = reactive({
+    loggedIn: false
+});
 
 const handleLogout = async () => {
     localStorage.removeItem('email');
     localStorage.removeItem('password');
     await axios.post('/logout');
-    // router.push({ name: 'Login' });
-    window.location.reload();
+    state.loggedIn = false;
+    router.push({ name: 'Login' });
+    // window.location.reload();
 };
+
+const getUser = async () => {
+    if(localStorage.getItem('email')) {
+        state.loggedIn = true;
+    }
+}
+
+onMounted(async () => {
+    getUser();
+});
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
 .navbar {
 
     input[type="checkbox"],

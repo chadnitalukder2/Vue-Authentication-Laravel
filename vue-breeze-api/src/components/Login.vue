@@ -20,9 +20,14 @@ const handleLogin = async () => {
     email: form.value.email,
     password: form.value.password,
   }).then((res) => {
+ 
     localStorage.setItem("password", form.value.password);
     localStorage.setItem("email", form.value.email);
-    window.location.reload();
+
+     router.push('/').then(() => {
+    // Force a full page reload
+      location.reload();
+    });
   })
 };
 </script>
