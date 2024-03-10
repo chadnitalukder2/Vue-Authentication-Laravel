@@ -126,7 +126,7 @@ const addProduct = async () => {
 form {
   border: 1px solid #f1f1f1;
   margin-left: 28%;
-  width: 80%;
+  width: 50%;
   margin-top: 100px;
   border-radius: 8px;
   padding: 20px;
