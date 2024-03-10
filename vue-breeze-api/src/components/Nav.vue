@@ -10,6 +10,7 @@
 
             <ul class="menu-items">
                 <li><router-link :to="{ name: 'Home' }">Home</router-link></li>
+                <li><router-link :to="{ name: 'Store' }">Store</router-link></li>
                 <li v-if="!state.loggedIn"><router-link :to="{ name: 'Login' }">Login</router-link></li>
                 <li v-if="!state.loggedIn"><router-link :to="{ name: 'Register' }">Register</router-link></li>
                 <li v-if="state.loggedIn">
