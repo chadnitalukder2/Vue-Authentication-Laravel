@@ -12,6 +12,11 @@ class ProductController extends Controller
     public function get_product(){
         
         $products = Product::orderBy('id', 'desc')->with('category', 'brand')->get();
+        
+        foreach ($products as $product) {
+            $product->product_colors = json_decode($product->product_colors);
+            $product->product_sizes = json_decode($product->product_sizes);
+        }    
         return response()->json([
             'products' => $products
         ], 200);
@@ -50,6 +55,8 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
             'product_details' => $request->product_details,
+            'product_colors' => $request->product_colors,
+            'product_sizes' => $request->product_sizes,
             'product_img' =>  $imagePath,
             'created_at' => Carbon::now(),
         ]);

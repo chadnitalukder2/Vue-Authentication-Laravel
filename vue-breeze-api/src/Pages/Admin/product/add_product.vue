@@ -8,6 +8,12 @@ const category = ref([]);
 const brand = ref([]);
 const form = ref([]);
 const image = ([]);
+
+const product_colors = ['Red', 'Blue', 'Green', 'Yellow', 'Black', 'White'];
+const product_sizes = ['Small', 'Medium', 'Large', 'XL'];
+
+const selectedSizes = ref([]);
+const selectedColors = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
   getCategory();
@@ -31,6 +37,7 @@ const handleFileChange = async (event) => {
 }
 //---------------------------------------------------
 const addProduct = async () => {
+  
     const formData = new FormData();
     formData.append('product_name', form.value.product_name);
     formData.append('product_price', form.value.product_price);
@@ -61,7 +68,7 @@ const addProduct = async () => {
 
         <label for="uname"><b>Product Quantity</b></label>
         <input  v-model="form.product_quantity" type="number" placeholder="Product Quantity" name="uname" required>
-
+        
         <div>
         <label for="uname"><b>Catagory Name</b></label>
             <select v-model="form.category_id" >
@@ -81,6 +88,19 @@ const addProduct = async () => {
                 </option>
             </select>
         </div>
+        <div class="input_wrapper">
+            <label for="uname"><b>Product Sizes</b></label>
+            <div v-for="size in product_sizes" :key="size">
+              <input type="checkbox" :name="size" :value="size" v-model="selectedSizes" /> {{ size }}
+            </div>
+        </div>
+        <div class="input_wrapper">
+          <label for="uname"><b>Product Colors</b></label>
+          <div v-for="color in product_colors" :key="color">
+            <input type="checkbox" :name="color" :value="color" v-model="selectedColors" /> {{ color }}
+          </div>
+        </div>
+       
 
         <label for="psw"><b>Product Image</b></label>
         <input  @change="handleFileChange"  type="file" placeholder="Product Image" name="psw" required>
@@ -104,7 +124,7 @@ const addProduct = async () => {
 form {
   border: 1px solid #f1f1f1;
   margin-left: 28%;
-  width: 55%;
+  width: 80%;
   margin-top: 100px;
   border-radius: 8px;
   padding: 20px;
@@ -124,10 +144,10 @@ input[type=text],
 input[type=password],
 input[type=file],
 input[type=number],
-select,textarea {
+select,textarea, .input_wrapper {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 12px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
