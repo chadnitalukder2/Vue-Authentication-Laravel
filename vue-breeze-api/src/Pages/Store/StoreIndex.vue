@@ -1,3 +1,6 @@
 <template>
-    Store
+    <div>
+        Store
+    </div>
+  
 </template>
