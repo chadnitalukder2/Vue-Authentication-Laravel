@@ -9,8 +9,11 @@
             </div>
 
             <ul class="menu-items">
+                
+               
                 <li><router-link :to="{ name: 'Home' }">Home</router-link></li>
                 <li><router-link :to="{ name: 'Store' }">Store</router-link></li>
+                <li><router-link :to="{ name: 'add-cart' }"><i class="fa-solid fa-cart-plus"></i></router-link></li>
                 <li v-if="!state.loggedIn"><router-link :to="{ name: 'Login' }">Login</router-link></li>
                 <li v-if="!state.loggedIn"><router-link :to="{ name: 'Register' }">Register</router-link></li>
                 <li v-if="state.loggedIn">
@@ -27,6 +30,8 @@
 </template>
 
 <script setup>
+
+import '@fortawesome/fontawesome-free/css/all.css';
 import { computed, onMounted, reactive } from 'vue';
 import axios from "axios";
 import { useRouter } from "vue-router";
