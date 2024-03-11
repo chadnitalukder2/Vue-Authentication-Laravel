@@ -54,6 +54,7 @@ class ProductController extends Controller
             'product_quantity' => $request->product_quantity,
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
+            'short_description' => $request->short_description,
             'product_details' => $request->product_details,
             'product_colors' => $request->product_colors,
             'product_sizes' => $request->product_sizes,
@@ -88,6 +89,9 @@ class ProductController extends Controller
                 'product_quantity' => $request->product_quantity,
                 // 'brand_id ' => $request->brand_id ,
                 // 'category_id ' => $request->category_id ,
+                'product_colors' => $request->product_colors,
+                'product_sizes' => $request->product_sizes,
+                'short_description' => $request->short_description,
                 'product_details' => $request->product_details,
         ]);
       

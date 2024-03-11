@@ -1,6 +1,59 @@
 <script setup>
 import '@fortawesome/fontawesome-free/css/all.css';
 
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { useRoute } from 'vue-router'
+const route = useRoute()
+//---------------------------------------------------
+const category = ref({
+    category_name: ''
+});
+const brand = ref({
+    brand_name: ''
+});
+const form = ref({
+    product_name: '',
+    product_price: '',
+    product_quantity: '',
+    brand_id : '',
+    category_id : '',
+    product_details: '',
+});
+const image = ref(null);
+//---------------------------------------------------
+onMounted(async () => {
+  getCategory();
+  getBrand();
+  getProduct();
+});
+
+
+//---------------------------------------------------
+const getProduct = async () => {
+    const id = route.params.id;
+    // console.log('routhiuhuunje', id);
+ let response = await axios.get(`/api/edit_product/${id}`);
+    form.value = response.data.product
+    // console.log('responseydyhfb', response.data.product);
+}
+//---------------------------------------------------
+const getCategory = async () => {
+  let response = await axios.get("/api/get_category");
+  category.value = response.data.category;
+  // console.log("response", category.value);
+};
+//---------------------------------------------------
+const getBrand = async () => {
+  let response = await axios.get("/api/get_brand");
+  brand.value = response.data.brand;
+  // console.log("response", category.value);
+};
+//---------------------------------------------------
+
+
 </script>
 
 <template>
@@ -8,10 +61,10 @@ import '@fortawesome/fontawesome-free/css/all.css';
     <div class="container">
         <div class="row">
             <div class="product_img">
-                <a href="" ><img src="../../assets/img/pexels-sunil-patel-599708.jpg" /></a>
+                <a href="" ><img :src="form.product_img" /></a>
             </div>
             <div class="product_details">
-                <h3>Nike Free RN 2019 iD</h3>
+                <h3>{{ form.product_name }}</h3>
                 <div class="rating ">
                     <p class="text_left">
                         <a href="#" >5.0</a>
@@ -28,21 +81,12 @@ import '@fortawesome/fontawesome-free/css/all.css';
                         <a href="#" style="color: #000;text-decoration: none;">500 <span style="color: #bbb">Sold</span></a>
                     </p>
                 </div>
-                <p class="price" ><span>$120.00</span></p>
+                <p class="price" ><span>${{ form.product_price }}</span></p>
                 <p style="color:#bbb ; font-size: 18px; line-height: 22px;">
-                    A small river named Duden flows by their place and supplies it
-                    with the necessary regelialia. It is a paradisematic country, in
-                    which roasted parts of sentences fly into your mouth.
+                    {{ form.short_description }}
                 </p>
                 <p style="color:#bbb ;    font-size: 18px; line-height: 22px;">
-                    On her way she met a copy. The copy warned the Little Blind Text,
-                    that where it came from it would have been rewritten a thousand
-                    times and everything that was left from its origin would be the
-                    word "and" and the Little Blind Text should turn around and return
-                    to its own, safe country. But nothing the copy said could convince
-                    her and so it didn’t take long until a few insidious Copy Writers
-                    ambushed her, made her drunk with Longe and Parole and dragged her
-                    into their agency, where they abused her for their.
+                    {{ form.product_details }}
                 </p>
 
                 <div class=" mt-4">
@@ -62,7 +106,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
                     </div>
                     
                     <div class="col-md-12">
-                        <p style="color: #000;font-size: 18px;">80 piece available</p>
+                        <p style="color: #000;font-size: 18px;">{{ form.product_quantity }} piece available</p>
                     </div>
                 </div>
                 <p style="margin-top: 35px;">

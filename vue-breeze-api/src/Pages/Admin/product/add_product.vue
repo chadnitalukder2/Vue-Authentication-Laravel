@@ -44,6 +44,7 @@ const addProduct = async () => {
     formData.append('product_quantity', form.value.product_quantity);
     formData.append('category_id', form.value.category_id);
     formData.append('brand_id', form.value.brand_id);
+    formData.append('short_description', form.value.short_description);
     formData.append('product_details', form.value.product_details);
     formData.append('product_colors', JSON.stringify(selectedColors.value));
     formData.append('product_sizes', JSON.stringify(selectedSizes.value));
@@ -107,7 +108,12 @@ const addProduct = async () => {
         <label for="psw"><b>Product Image</b></label>
         <input  @change="handleFileChange"  type="file" placeholder="Product Image" name="psw" required>
 
-        <label for="uname"><b>Category Name</b></label>
+        <label for="uname"><b>Product Short Description</b></label>
+        <textarea v-model="form.short_description" type="text" placeholder="" >
+                        bccnjn hbdnund
+        </textarea>
+
+        <label for="uname"><b>Product Details</b></label>
         <textarea v-model="form.product_details" type="text" placeholder="" >
                         bccnjn hbdnund
         </textarea><br><br>
@@ -125,7 +131,7 @@ const addProduct = async () => {
 <style lang="scss" scoped>
 form {
   border: 1px solid #f1f1f1;
-  margin-left: 28%;
+  margin-left: 25%;
   width: 50%;
   margin-top: 100px;
   border-radius: 8px;
