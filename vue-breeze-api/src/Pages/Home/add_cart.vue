@@ -47,6 +47,7 @@
       </table>
     </div>
 
+    <div class="cart">
     <div class="cart_total">
       <h3>Cart Totals</h3>
       <p class="d-flex">
@@ -67,7 +68,8 @@
         <span style="color: #000000; font-weight: 600">$17.60</span>
       </p>
     </div>
-   
+    <p class="check_out"><a href="">Proceed to Checkout</a></p>
+  </div>
   </div>
 </template>
 
@@ -76,6 +78,9 @@
   width: 100%;
   padding: 80px 100px;
   text-align: center;
+}
+.cart{
+ 
 }
 .cart_total {
   padding: 20px;
@@ -108,6 +113,25 @@
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
+}
+.check_out{
+        border-radius: 30px;
+        width: 30%;
+        background: #D1EAE4;
+        font-size: 18px;
+        padding: 16px;
+        border: 2px solid #D1EAE4;
+    a{
+        text-decoration: none;
+        color: black;
+        
+    }
+    &:hover{
+            transition: all 0.2s ease;
+            background: white;
+            border: 2px solid #D1EAE4;
+        }
+   
 }
 
 table {
