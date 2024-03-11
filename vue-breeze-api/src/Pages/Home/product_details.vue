@@ -14,7 +14,7 @@ const category = ref({
 const brand = ref({
     brand_name: ''
 });
-const form = ref({
+const product = ref({
     product_name: '',
     product_price: '',
     product_quantity: '',
@@ -36,7 +36,7 @@ const getProduct = async () => {
     const id = route.params.id;
     // console.log('routhiuhuunje', id);
  let response = await axios.get(`/api/edit_product/${id}`);
-    form.value = response.data.product
+    product.value = response.data.product
     // console.log('responseydyhfb', response.data.product);
 }
 //---------------------------------------------------
@@ -61,10 +61,10 @@ const getBrand = async () => {
     <div class="container">
         <div class="row">
             <div class="product_img">
-                <a href="" ><img :src="form.product_img" /></a>
+                <a href="" ><img :src="product.product_img" /></a>
             </div>
             <div class="product_details">
-                <h3>{{ form.product_name }}</h3>
+                <h3>{{ product.product_name }}</h3>
                 <div class="rating ">
                     <p class="text_left">
                         <a href="#" >5.0</a>
@@ -81,21 +81,25 @@ const getBrand = async () => {
                         <a href="#" style="color: #000;text-decoration: none;">500 <span style="color: #bbb">Sold</span></a>
                     </p>
                 </div>
-                <p class="price" ><span>${{ form.product_price }}</span></p>
+                <p class="price" ><span>${{ product.product_price }}</span></p>
                 <p style="color:#bbb ; font-size: 18px; line-height: 22px;">
-                    {{ form.short_description }}
+                    {{ product.short_description }}
                 </p>
                 <p style="color:#bbb ;    font-size: 18px; line-height: 22px;">
-                    {{ form.product_details }}
+                    {{ product.product_details }}
                 </p>
 
                 <div class=" mt-4">
                     <div class="select-size">
-                        <select name="" id="" class="form-control">
-                            <option value="">Small</option>
-                            <option value="">Medium</option>
-                            <option value="">Large</option>
-                            <option value="">Extra Large</option>
+                        <label>Sizes</label>
+                        <select name="" id="" class="product-control">
+                            <option v-for="product_size in product.product_sizes" value="">{{ product_size }}</option>
+                        </select>
+                    </div>
+                    <div class="select-size">
+                        <label>Colors</label>
+                        <select name="" id="" class="product-control">
+                            <option v-for="product_color in product.product_colors" value="">{{ product_color }}</option>
                         </select>
                     </div>
                         
@@ -106,7 +110,7 @@ const getBrand = async () => {
                     </div>
                     
                     <div class="col-md-12">
-                        <p style="color: #000;font-size: 18px;">{{ form.product_quantity }} piece available</p>
+                        <p style="color: #000;font-size: 18px;">{{ product.product_quantity }} piece available</p>
                     </div>
                 </div>
                 <p style="margin-top: 35px;">
@@ -232,7 +236,7 @@ const getBrand = async () => {
         padding: 10px;
         letter-spacing: 2px;
         color: #000000;
-        text-transform: uppercase;
+        text-transproduct: uppercase;
         border:1px solid rgba(0, 0, 0, 0.1);
         margin: 20px 0px;
     }
@@ -271,7 +275,7 @@ const getBrand = async () => {
         background:#D1EAE4;
         border: 1px solid #D1EAE4;
         color: #000000;
-        transform: 0.3;
+        transproduct: 0.3;
     }
 }
 .buy_btn{

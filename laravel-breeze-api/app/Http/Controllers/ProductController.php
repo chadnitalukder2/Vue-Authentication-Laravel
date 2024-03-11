@@ -75,6 +75,8 @@ class ProductController extends Controller
 
     public function edit_product($id){
         $product = Product::find($id);
+        $product->product_colors = json_decode($product->product_colors);
+        $product->product_sizes = json_decode($product->product_sizes);
         return response()->json([
             'product' => $product
         ], 200);
