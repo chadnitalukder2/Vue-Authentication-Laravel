@@ -15,9 +15,11 @@
         <tr>
           <td>Peter</td>
           <td>Griffin</td>
-          <td>$100</td>
           <td>Peter</td>
-          <td>Griffin</td>
+          <td>
+            <input type="number" value="1">
+          </td>
+          <td>$100</td>
           <td><i class="fa-solid fa-xmark" style="    background: #D1EAE4; padding: 5px 8px;"></i></td>
         </tr>
         <tr>
@@ -150,4 +152,17 @@ td {
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+td{
+  input{
+    width: 40%;
+    padding: 15px 10px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    &:focus-visible{
+      outline: none;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    }
+  }
+}
+
 </style>

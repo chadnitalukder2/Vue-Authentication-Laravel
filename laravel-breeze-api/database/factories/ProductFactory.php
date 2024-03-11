@@ -34,6 +34,7 @@ class ProductFactory extends Factory
             'product_img' => $this->faker->imageUrl(400, 300, 'food'),
             'product_colors' => $colorsString,
             'product_sizes' => $sizesString,
+            'short_description' => $this->faker->paragraph,
             'product_details' => $this->faker->paragraph,
         ];
     }

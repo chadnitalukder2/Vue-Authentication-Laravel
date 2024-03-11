@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/product-details/:id",
     name: "product-details",
-    component: () => import("../Pages/Home/product_details.vue"),
+    component: () => import("../Pages/product_details/product_details.vue"),
   },
   {
     path: "/add-cart",

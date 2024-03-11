@@ -12,12 +12,14 @@ const props = defineProps(["product"]);
     <div class="product-card">
         <div class="badge">Hot</div>
         <div class="product-tumb">
+            <router-link :to="{ name: 'product-details', params: { id: props.product.id }}" >
             <img :src=" props.product.product_img" alt="">
+            </router-link>
         </div>
         <div class="product-details">
             <span class="product-catagory">{{ props.product.brand.brand_name  }}, {{ props.product.category.category_name }}</span>
             <h4><router-link :to="{ name: 'product-details', params: { id: props.product.id }}" >{{ props.product.product_name }} </router-link></h4>
-            <p>{{ props.product.short_description }}</p>
+            <p><router-link :to="{ name: 'product-details', params: { id: props.product.id }}" style="text-decoration: none;">{{ props.product.short_description }}</router-link> </p>
             <div class="product-bottom-details">
                 <div class="product-price"> ${{ props.product.product_price }}</div>
                 <div class="product-links">
