@@ -91,13 +91,13 @@ const getBrand = async () => {
 
                 <div class=" mt-4">
                     <div class="select-size">
-                        <label>Sizes</label>
+                        <label>Sizes : </label>
                         <select name="" id="" class="product-control">
                             <option v-for="product_size in product.product_sizes" value="">{{ product_size }}</option>
                         </select>
                     </div>
                     <div class="select-size">
-                        <label>Colors</label>
+                        <label>Colors : </label>
                         <select name="" id="" class="product-control">
                             <option v-for="product_color in product.product_colors" value="">{{ product_color }}</option>
                         </select>
