@@ -23,6 +23,7 @@ const handleLogin = async () => {
  
     localStorage.setItem("password", form.value.password);
     localStorage.setItem("email", form.value.email);
+    localStorage.setItem("", form.value.email);
 
      router.push('/').then(() => {
     // Force a full page reload

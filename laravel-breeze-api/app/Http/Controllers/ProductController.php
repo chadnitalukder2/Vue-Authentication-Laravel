@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -78,7 +79,8 @@ class ProductController extends Controller
         $product->product_colors = json_decode($product->product_colors);
         $product->product_sizes = json_decode($product->product_sizes);
         return response()->json([
-            'product' => $product
+            'product' => $product,
+            'user_id' => Auth::user()->id,
         ], 200);
     }
 

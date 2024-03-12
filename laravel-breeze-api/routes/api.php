@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,5 @@ Route::get('/delete_user/{id}', [Controller::class, 'delete_user']);
 Route::get('/edit_user/{id}', [Controller::class, 'edit_user']);
 Route::post('/update_user/{id}', [Controller::class, 'update_user']);
 
+
+Route::post('/add_review', [ReviewController::class, 'add_review']);

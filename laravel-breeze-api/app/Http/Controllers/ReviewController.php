@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -12,9 +13,18 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function add_review( Request $request)
     {
-        //
+        $request->validate([
+            'review' => 'required|string',
+        ]);
+        Review::insert([
+            'review' => $request->review,
+            'rating' => $request->rating,
+            'product_id' => $request->product_id,
+            'user_id' => $request->user_id,
+            'created_at' => Carbon::now(),
+        ]);
     }
 
     /**
