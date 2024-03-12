@@ -106,6 +106,14 @@ a {
     text-decoration: none;
     transition: 0.3s;
 }
+.product-details p a{
+    font-weight: 500;
+    display: block;
+    margin-bottom: 20px;
+    color: #7c7878cc;
+    text-decoration: none;
+    transition: 0.3s;
+}
 
 .product-details h4 a:hover {
     color: #009688;

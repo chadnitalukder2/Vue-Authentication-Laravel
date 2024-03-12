@@ -8,6 +8,20 @@ const router = useRouter();
 import { useRoute } from 'vue-router'
 const route = useRoute()
 //---------------------------------------------------
+const count = ref(1);
+
+const decrementCount = () => {
+  if (count.value > 1) {
+    count.value--;
+  }
+};
+
+const incrementCount = () => {
+  if (count.value < 100) {
+    count.value++;
+  }
+};
+//====================================
 const category = ref({
     category_name: ''
 });
@@ -104,9 +118,9 @@ const getBrand = async () => {
                     </div>
                         
                     <div class="input_group">
-                        <button type="button"> <i class="fa-solid fa-minus"></i> </button>
-                        <input type="text" id="quantity" name="quantity" value="1" min="1" max="100" />
-                        <button type="button" style="margin-left: 10px;"><i class="fa-solid fa-plus"></i></button>
+                        <button type="button"  @click="decrementCount"> <i class="fa-solid fa-minus"></i> </button>
+                        <input type="text" id="quantity" name="quantity" :value= 'count' min="1" max="100" />
+                        <button type="button" @click="incrementCount" style="margin-left: 10px;"><i class="fa-solid fa-plus"></i></button>
                     </div>
                     
                     <div class="col-md-12">
@@ -123,9 +137,6 @@ const getBrand = async () => {
         <div class="heading">
             <div style="flex-basis: 33%;">
                 <h3 class="mb-4"> Description </h3>
-            </div>
-            <div style="flex-basis: 33%;">
-                <h3 class="mb-4">Manufactured </h3>
             </div>
             <div style="flex-basis: 33%;">
                 <h3 class="mb-4"> Reviews</h3>
@@ -249,6 +260,7 @@ const getBrand = async () => {
         border:1px solid rgba(0, 0, 0, 0.1);
         margin-right:10px ;
         padding: 10px;
+        cursor: pointer;
         color: #000000;
     }
     input{
