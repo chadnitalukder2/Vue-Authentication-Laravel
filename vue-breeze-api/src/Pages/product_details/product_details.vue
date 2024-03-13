@@ -48,7 +48,7 @@ const getProduct = async () => {
     let response = await axios.get(`/api/edit_product/${id}`);
     product.value = response.data.product
     user_id.value = response.data
-    console.log('responseydyhfb', response.data);
+    // console.log('responseydyhfb', response.data);
 }
 //---------------------------------------------------
 const getCategory = async () => {
@@ -108,13 +108,16 @@ const formatDate = (dateString) => {
                     <div class="rating ">
                         <p class="text_left">
                             <a href="#"> {{ product.average_rating }} </a>
+                            <!-- <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i> -->
+                            <span>
+                                <label v-for="rating in 5" name="rating" :class=" product?.reviews?.rating >= rating ? 'active' : ''" value="1">★</label>
+                            </span>
                         </p>
-                        <p class="text_middle mr-4">
+                        <p class="text_middle ">
                             <a href="#" style="color: #000; text-decoration: none;">{{ product?.reviews?.length}} <span
                                     style="color: #bbb">Rating</span></a>
                         </p>
@@ -299,8 +302,7 @@ input[type=submit]:hover {
 
         .rating {
             display: flex;
-            gap: 20px;
-
+            gap: 20px ;
             .text_left {
                 a {
                     color: #dbcc8f;
@@ -308,12 +310,18 @@ input[type=submit]:hover {
                     padding-right: 10px;
                     font-size: 18px;
                 }
-
-                i {
-                    color: #dbcc8f;
-                    font-size: 14px;
-                    padding: 2px;
+                span{
+                    level {
+                    color: gray;
+                        font-size: 18px;
+                    }
+                    .active {
+                        color: #f1c40f;
+                    }
                 }
+                
+                
+                    
             }
         }
 
