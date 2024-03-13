@@ -30,14 +30,7 @@ const category = ref({
 const brand = ref({
     brand_name: ''
 });
-const product = ref({
-    product_name: '',
-    product_price: '',
-    product_quantity: '',
-    brand_id: '',
-    category_id: '',
-    product_details: '',
-});
+const product = ref({});
 const image = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
@@ -80,10 +73,11 @@ const addReview = async () =>{
     formData.append('rating', reviews.value.rating);
     formData.append('product_id', product.value.id );
     formData.append('user_id', user_id.value.user_id);
-    
-    
     // console.log({data});
-    let response = await axios.post('/api/add_review', formData);
+    await axios.post('/api/add_review', formData).then(()=> {
+        getProduct();
+        reviews =  [];
+    });
 }
 
 const getReview = async () => {
@@ -113,7 +107,7 @@ const formatDate = (dateString) => {
                     <h3>{{ product.product_name }}</h3>
                     <div class="rating ">
                         <p class="text_left">
-                            <a href="#">5.0</a>
+                            <a href="#"> {{ product.average_rating }} </a>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
@@ -121,7 +115,7 @@ const formatDate = (dateString) => {
                             <i class="fa-regular fa-star"></i>
                         </p>
                         <p class="text_middle mr-4">
-                            <a href="#" style="color: #000; text-decoration: none;">100 <span
+                            <a href="#" style="color: #000; text-decoration: none;">{{ product?.reviews?.length}} <span
                                     style="color: #bbb">Rating</span></a>
                         </p>
                         <p class="text_right">
@@ -195,12 +189,11 @@ const formatDate = (dateString) => {
                 </p>
             </div>
             <div class="details" >
-                <h3 class="mb-4">({{reviewItem.length  }})Reviews</h3>
+                <h3 class="mb-4">({{ product?.reviews?.length  }})Reviews</h3>
                 <div class="review-wrapper">
-                    <div class="review-template" v-for="item in reviewItem" :key="item.id">
-                     
-                        <div class="adrm_review_temp_one">
-                            <div class="adrm_review_temp_one_avatar"><img src="https://via.placeholder.com/150"
+                    <div class="review-template">
+                        <div v-for="item in product?.reviews" :key="item.id" class="adrm_review_temp_one">
+                            <div class="adrm_review_temp_one_avatar"><img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/3431298/original/Onixus1flat/make-your-profile-picture--looks-flat-designed.jpg"
                                     alt="Avatar"></div>
                             <div class="adrm_review_temp_one_content">
                                 <div class="adrm_review_temp_one_content_header">
@@ -209,12 +202,10 @@ const formatDate = (dateString) => {
                                         <h3 class="adrm_review_temp_one_content_header_name">{{item.user.name }}</h3>
                                     </div>
                                     <div class="adrm_rating">
-                                        <div class="adrm-star-rating"><span><label name="rating" class="active"
-                                            value="1">★</label></span><span><label name="rating" class="active"
-                                            value="1">★</label></span><span><label name="rating" class=""
-                                            value="1">★</label></span><span><label name="rating" class=""
-                                            value="1">★</label></span><span><label name="rating" class=""
-                                            value="1">★</label></span>
+                                        <div class="adrm-star-rating">
+                                            <span>
+                                                <label v-for="rating in 5" name="rating" :class=" item.rating >= rating ? 'active' : ''" value="1">★</label>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +217,7 @@ const formatDate = (dateString) => {
                     </div>
                     <div class="review-form">
                         <form @submit.prevent="addReview"> 
-                        <h1>Write your reviews ({{reviews.length  }})</h1>
+                        <h1>Write your reviews</h1>
                         <label for="uname"><b>Provide your rating</b></label>
                         <select name="rating" v-model="reviews.rating">
                             <option>Select your rating</option>
@@ -242,9 +233,7 @@ const formatDate = (dateString) => {
 
                         <input type="submit" value="Submit">
                     </form>
-                    </div>
-
-                    
+                    </div>           
                 </div>
             </div>
         </div>
@@ -476,6 +465,7 @@ input[type=submit]:hover {
             background: #9e9e9e1a;
             padding: 20px;
             border-radius: 8px;
+            margin-bottom: 10px;
 
             @media screen and (max-width: 768px) {
                 padding: 4px;

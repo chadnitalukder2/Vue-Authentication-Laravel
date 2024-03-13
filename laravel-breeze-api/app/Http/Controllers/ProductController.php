@@ -75,7 +75,10 @@ class ProductController extends Controller
     }
 
     public function edit_product($id){
-        $product = Product::find($id);
+        $product = Product::with('reviews.user')->find($id);
+        $averageRating = $product->averageRating();
+        $product->average_rating = round($averageRating, 2);
+
         $product->product_colors = json_decode($product->product_colors);
         $product->product_sizes = json_decode($product->product_sizes);
         return response()->json([
