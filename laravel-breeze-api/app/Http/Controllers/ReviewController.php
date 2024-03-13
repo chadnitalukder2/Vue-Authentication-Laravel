@@ -14,17 +14,22 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_review( Request $request)
+
     {
+        // return $request;
         $request->validate([
             'review' => 'required|string',
         ]);
-        Review::insert([
-            'review' => $request->review,
-            'rating' => $request->rating,
-            'product_id' => $request->product_id,
-            'user_id' => $request->user_id,
-            'created_at' => Carbon::now(),
+        $review = new Review([
+            'review' => $request->input('review'),
+            'rating' => $request->input('rating'),
+            'product_id' => $request->input('product_id'),
+            'user_id' => $request->input('user_id'),
         ]);
+    
+        $review->save();
+    
+        return response()->json(['message' => 'Review added successfully'], 201);
     }
 
     /**
@@ -32,9 +37,12 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function get_review()
     {
-        //
+        $review = Review::orderBy('id', 'desc')->with('user')->get();
+        return response()->json([
+            'review' => $review
+        ], 200);
     }
 
     /**

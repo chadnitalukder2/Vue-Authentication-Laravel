@@ -46,3 +46,4 @@ Route::post('/update_user/{id}', [Controller::class, 'update_user']);
 
 
 Route::post('/add_review', [ReviewController::class, 'add_review']);
+Route::get('/get_review', [ReviewController::class, 'get_review']);

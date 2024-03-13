@@ -44,6 +44,7 @@ onMounted(async () => {
     getCategory();
     getBrand();
     getProduct();
+    getReview();
 });
 
 
@@ -71,24 +72,32 @@ const getBrand = async () => {
 //---------------------------------------------------
 
 const reviews = ref([]);
+const reviewItem = ref([]);
 
 const addReview = async () =>{
-    // let data = {
-    //     'review' : reviews.value.review,
-    //     'rating' : reviews.value.rating,
-    //     'product_id ' : product.value.id,
-    //     'user_id': user_id.value.user_id,
-    // }
     const formData = new FormData();
     formData.append('review', reviews.value.review);
     formData.append('rating', reviews.value.rating);
-    formData.append('product_id ', product.value.id );
+    formData.append('product_id', product.value.id );
     formData.append('user_id', user_id.value.user_id);
     
     
     // console.log({data});
     let response = await axios.post('/api/add_review', formData);
 }
+
+const getReview = async () => {
+    let response = await axios.get("/api/get_review");
+    reviewItem.value = response.data.review;
+    console.log('response11111', reviewItem.value);
+}
+
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { month: 'short', day: '2-digit', year: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+};
+//--------------------------------------------------
 
 //---------------------------------------------------
 </script>
@@ -185,19 +194,19 @@ const addReview = async () =>{
                     agency, where they abused her for their.
                 </p>
             </div>
-            <div class="details">
-                <h3 class="mb-4">23 Reviews</h3>
+            <div class="details" >
+                <h3 class="mb-4">({{reviewItem.length  }})Reviews</h3>
                 <div class="review-wrapper">
-                    <div class="review-template">
-                        <h1>Reviews (23)</h1>
+                    <div class="review-template" v-for="item in reviewItem" :key="item.id">
+                     
                         <div class="adrm_review_temp_one">
                             <div class="adrm_review_temp_one_avatar"><img src="https://via.placeholder.com/150"
                                     alt="Avatar"></div>
                             <div class="adrm_review_temp_one_content">
                                 <div class="adrm_review_temp_one_content_header">
                                     <div class="left">
-                                        <p class="date">March, 8, 2024</p>
-                                        <h3 class="adrm_review_temp_one_content_header_name">Nitesh das</h3>
+                                        <p class="date">{{ formatDate(item.created_at) }}</p>
+                                        <h3 class="adrm_review_temp_one_content_header_name">{{item.user.name }}</h3>
                                     </div>
                                     <div class="adrm_rating">
                                         <div class="adrm-star-rating"><span><label name="rating" class="active"
@@ -210,14 +219,14 @@ const addReview = async () =>{
                                     </div>
                                 </div>
                                 <div class="adrm_review_temp_one_content_body">
-                                    <p class="review">My love and everything is my wife , love you bou </p>
+                                    <p class="review"> {{item.review}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="review-form">
                         <form @submit.prevent="addReview"> 
-                        <h1>Write your reviews (23)</h1>
+                        <h1>Write your reviews ({{reviews.length  }})</h1>
                         <label for="uname"><b>Provide your rating</b></label>
                         <select name="rating" v-model="reviews.rating">
                             <option>Select your rating</option>
@@ -234,6 +243,8 @@ const addReview = async () =>{
                         <input type="submit" value="Submit">
                     </form>
                     </div>
+
+                    
                 </div>
             </div>
         </div>
