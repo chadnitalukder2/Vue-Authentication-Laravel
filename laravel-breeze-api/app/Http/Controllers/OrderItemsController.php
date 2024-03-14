@@ -35,7 +35,7 @@ class OrderItemsController extends Controller
      */
     public function get_OrderItem()
     {
-        $orderItem = OrderItems::orderBy('id', 'desc')->get();
+        $orderItem = OrderItems::orderBy('id', 'desc')->with('product')->get();
         return response()->json([
             'orderItem' => $orderItem
         ], 200);

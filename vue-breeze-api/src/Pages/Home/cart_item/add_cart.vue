@@ -36,9 +36,11 @@ const getOrderItem = async () => {
         </tr>
         
         <tr v-for="item in orderItem" :key="item.id">
-          <td>{{ item.color }}</td>
-          <td>{{ item.size }}</td>
-          <td>Peter</td>
+          <td> 
+            <img :src="item.product.product_img" style="width: 70px; height: 60px" >
+          </td>
+          <td>{{ item.product.product_name }}</td>
+          <td>{{ item.product.product_price }}</td>
           <td>
             <input type="number" v-model="item.quantity">
           </td>
