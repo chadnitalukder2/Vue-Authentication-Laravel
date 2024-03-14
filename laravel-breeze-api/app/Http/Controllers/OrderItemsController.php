@@ -15,8 +15,10 @@ class OrderItemsController extends Controller
     public function add_OrderItem(Request $request)
     {
         $review = new OrderItems([
-            'review' => $request->input('review'),
-            'rating' => $request->input('rating'),
+            'quantity' => $request->input('quantity'),
+            'color' => $request->input('color'),
+            'size' => $request->input('size'),
+            'line_total' => $request->input('line_total'),
             'product_id' => $request->input('product_id'),
             'user_id' => $request->input('user_id'),
         ]);
@@ -31,9 +33,13 @@ class OrderItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function get_OrderItem()
     {
-        //
+        $orderItem = OrderItems::orderBy('id', 'desc')->get();
+        return response()->json([
+            'orderItem' => $orderItem
+        ], 200);
+        // return $this->belongsTo(Product::class);
     }
 
     /**

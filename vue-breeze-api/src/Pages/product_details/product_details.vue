@@ -87,9 +87,7 @@ const formatDate = (dateString) => {
     return date.toLocaleDateString('en-US', options);
 };
 //--------------------------------------------------
-const orderItem = ref({
-  
-});
+const orderItem = ref({});
 
 const addOrderItem = async () => {
   let total = product.value.product_price * count.value;
@@ -103,7 +101,7 @@ const addOrderItem = async () => {
     user_id: user_id.value.user_id
   };
 
-  console.log({data});
+//   console.log({data});
   await axios.post('/api/add_OrderItem', data);
 };
 //---------------------------------------------------

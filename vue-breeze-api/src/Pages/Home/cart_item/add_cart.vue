@@ -1,4 +1,26 @@
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+//----------------------------------------------------
+const orderItem = ref([]);
+//---------------------------------------------------
+onMounted(async () => {
+    getOrderItem();
+});
+//----------------------------
+
+const getOrderItem = async () => {
+    let response = await axios.get("/api/get_OrderItem");
+    orderItem.value = response.data.orderItem;
+    console.log("response", orderItem.value);
+};
+//-------------------------------------
+</script>
 
 <template>
   <div class="container"> 
@@ -12,40 +34,19 @@
           <th>Total</th>
           <th>Action</th>
         </tr>
-        <tr>
-          <td>Peter</td>
-          <td>Griffin</td>
+        
+        <tr v-for="item in orderItem" :key="item.id">
+          <td>{{ item.color }}</td>
+          <td>{{ item.size }}</td>
           <td>Peter</td>
           <td>
-            <input type="number" value="1">
+            <input type="number" v-model="item.quantity">
           </td>
-          <td>$100</td>
+          <td>${{ item.line_total }}</td>
           <td><i class="fa-solid fa-xmark" style="    background: #D1EAE4; padding: 5px 8px;"></i></td>
         </tr>
-        <tr>
-          <td>Lois</td>
-          <td>Griffin</td>
-          <td>$150</td>
-          <td>Peter</td>
-          <td>Griffin</td>
-          <td>$100</td>
-        </tr>
-        <tr>
-          <td>Joe</td>
-          <td>Swanson</td>
-          <td>$300</td>
-          <td>Peter</td>
-          <td>Griffin</td>
-          <td>$100</td>
-        </tr>
-        <tr>
-          <td>Cleveland</td>
-          <td>Brown</td>
-          <td>$250</td>
-          <td>Peter</td>
-          <td>Griffin</td>
-          <td>$100</td>
-        </tr>
+
+    
       </table>
     </div>
 

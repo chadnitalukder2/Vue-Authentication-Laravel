@@ -49,3 +49,4 @@ Route::post('/update_user/{id}', [Controller::class, 'update_user']);
 Route::post('/add_review', [ReviewController::class, 'add_review']);
 
 Route::post('/add_OrderItem', [OrderItemsController::class, 'add_OrderItem']);
+Route::get('/get_OrderItem', [OrderItemsController::class, 'get_OrderItem']);

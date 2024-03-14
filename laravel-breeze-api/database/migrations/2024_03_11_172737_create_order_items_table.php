@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('line_total');
             $table->string('color')->nullable();
-            $table->integer('size')->nullable();
+            $table->string('size')->nullable();
             $table->string('status')->default('cart');
             $table->timestamps();
         });
