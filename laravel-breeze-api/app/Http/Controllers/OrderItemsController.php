@@ -12,9 +12,18 @@ class OrderItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function add_OrderItem(Request $request)
     {
-        //
+        $review = new OrderItems([
+            'review' => $request->input('review'),
+            'rating' => $request->input('rating'),
+            'product_id' => $request->input('product_id'),
+            'user_id' => $request->input('user_id'),
+        ]);
+    
+        $review->save();
+    
+        return response()->json(['message' => 'Review added successfully'], 201);
     }
 
     /**

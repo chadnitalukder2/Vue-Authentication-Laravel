@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\OrderItemsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
@@ -46,4 +47,5 @@ Route::post('/update_user/{id}', [Controller::class, 'update_user']);
 
 
 Route::post('/add_review', [ReviewController::class, 'add_review']);
-Route::get('/get_review', [ReviewController::class, 'get_review']);
+
+Route::post('/add_OrderItem', [OrderItemsController::class, 'add_OrderItem']);

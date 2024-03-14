@@ -1,5 +1,6 @@
 <script setup>
 import '@fortawesome/fontawesome-free/css/all.css';
+import rating from './rating.vue';
 
 import { ref, onMounted } from "vue";
 import axios from "axios";
@@ -30,14 +31,13 @@ const category = ref({
 const brand = ref({
     brand_name: ''
 });
-const product = ref({});
+const product = ref([]);
 const image = ref(null);
 //---------------------------------------------------
 onMounted(async () => {
     getCategory();
     getBrand();
     getProduct();
-    getReview();
 });
 
 
@@ -65,7 +65,6 @@ const getBrand = async () => {
 //---------------------------------------------------
 
 const reviews = ref([]);
-const reviewItem = ref([]);
 
 const addReview = async () =>{
     const formData = new FormData();
@@ -76,15 +75,11 @@ const addReview = async () =>{
     // console.log({data});
     await axios.post('/api/add_review', formData).then(()=> {
         getProduct();
-        reviews =  [];
+        reviews.value =  [];
     });
+    
 }
 
-const getReview = async () => {
-    let response = await axios.get("/api/get_review");
-    reviewItem.value = response.data.review;
-    console.log('response11111', reviewItem.value);
-}
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -92,7 +87,25 @@ const formatDate = (dateString) => {
     return date.toLocaleDateString('en-US', options);
 };
 //--------------------------------------------------
+const orderItem = ref({
+  
+});
 
+const addOrderItem = async () => {
+  let total = product.value.product_price * count.value;
+  
+  let data = {
+    quantity: count.value,
+    color: orderItem.value.color,
+    size: orderItem.value.size,
+    line_total: total, 
+    product_id: product.value.id,
+    user_id: user_id.value.user_id
+  };
+
+  console.log({data});
+  await axios.post('/api/add_OrderItem', data);
+};
 //---------------------------------------------------
 </script>
 
@@ -100,72 +113,75 @@ const formatDate = (dateString) => {
     <div>
         <div class="container">
             <div class="row">
-                <div class="product_img">
-                    <a href=""><img :src="product.product_img" /></a>
-                </div>
-                <div class="product_details">
-                    <h3>{{ product.product_name }}</h3>
-                    <div class="rating ">
-                        <p class="text_left">
-                            <a href="#"> {{ product.average_rating }} </a>
-                            <!-- <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i> -->
-                            <span>
-                                <label v-for="rating in 5" name="rating" :class=" product?.reviews?.rating >= rating ? 'active' : ''" value="1">★</label>
-                            </span>
-                        </p>
-                        <p class="text_middle ">
-                            <a href="#" style="color: #000; text-decoration: none;">{{ product?.reviews?.length}} <span
-                                    style="color: #bbb">Rating</span></a>
-                        </p>
-                        <p class="text_right">
-                            <a href="#" style="color: #000;text-decoration: none;">500 <span
-                                    style="color: #bbb">Sold</span></a>
-                        </p>
+             
+                    <div class="product_img">
+                        <a href=""><img :src="product.product_img" /></a>
                     </div>
-                    <p class="price"><span>${{ product.product_price }}</span></p>
-                    <p style="color:#bbb ; font-size: 18px; line-height: 22px;">
-                        {{ product.short_description }}
-                    </p>
-                    <p style="color:#bbb ;    font-size: 18px; line-height: 22px;">
-                        {{ product.product_details }}
-                    </p>
+                
+                    <div class="product_details">
+                       
+                  
+                        <h3 >{{ product.product_name }}</h3>
+                        <div class="rating ">
+                            <p class="text_left" style="display: flex;">
+                                <a href="#"> {{ product.average_rating }} </a>
+                                <span>
+                                    <rating :rating="product?.average_rating"></rating>
+                                </span>
+                            </p>
+                            <p class="text_middle ">
+                                <a href="#" style="color: #000; text-decoration: none;">{{ product?.reviews?.length}} <span
+                                        style="color: #bbb">Rating</span></a>
+                            </p>
+                            <p class="text_right">
+                                <a href="#" style="color: #000;text-decoration: none;">500 <span
+                                        style="color: #bbb">Sold</span></a>
+                            </p>
+                        </div>
+                        <p   class="price" ><span>${{ product.product_price }}</span></p>
+                        <p style="color:#bbb ; font-size: 18px; line-height: 22px;">
+                            {{ product.short_description }}
+                        </p>
+                        <p style="color:#bbb ;    font-size: 18px; line-height: 22px;">
+                            {{ product.product_details }}
+                        </p>
+                        <form @submit.prevent="addOrderItem">
+                        <div class=" mt-4">
+                            <div class="select-size">
+                                <label>Sizes : </label>
+                                <select v-model="orderItem.size" class="product-control">
+                                    <option v-for="product_size in product.product_sizes" :key="product_size.id">
+                                        {{product_size }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="select-size">
+                                <label>Colors : </label>
+                                <select v-model="orderItem.color"  class="product-control">
+                                    <option v-for="product_color in product.product_colors" :key="product_color.id">
+                                        {{ product_color }}
+                                    </option>
+                                </select>
+                            </div>
 
-                    <div class=" mt-4">
-                        <div class="select-size">
-                            <label>Sizes : </label>
-                            <select name="" id="" class="product-control">
-                                <option v-for="product_size in product.product_sizes" :key="product_size.id" value="">{{
-                        product_size }}</option>
-                            </select>
-                        </div>
-                        <div class="select-size">
-                            <label>Colors : </label>
-                            <select name="" id="" class="product-control">
-                                <option v-for="product_color in product.product_colors" :key="product_color.id"
-                                    value="">{{ product_color }}</option>
-                            </select>
-                        </div>
+                            <div class="input_group">
+                                <button type="button" @click="decrementCount"> <i class="fa-solid fa-minus"></i> </button>
+                                <input type="text" :value='count' min="1" max="100" />
+                                <button type="button" @click="incrementCount" style="margin-left: 10px;"><i
+                                        class="fa-solid fa-plus"></i></button>
+                            </div>
 
-                        <div class="input_group">
-                            <button type="button" @click="decrementCount"> <i class="fa-solid fa-minus"></i> </button>
-                            <input type="text" id="quantity" name="quantity" :value='count' min="1" max="100" />
-                            <button type="button" @click="incrementCount" style="margin-left: 10px;"><i
-                                    class="fa-solid fa-plus"></i></button>
+                            <div class="col-md-12">
+                                <p style="color: #000;font-size: 18px;">{{ product.product_quantity }} piece available</p>
+                            </div>
                         </div>
-
-                        <div class="col-md-12">
-                            <p style="color: #000;font-size: 18px;">{{ product.product_quantity }} piece available</p>
-                        </div>
+                        <p style="margin-top: 35px;">
+                           <button type="submit" class="cart_btn"> Add to Cart</button>
+                            <a class="buy_btn">Buy now</a>
+                        </p>
+                    </form>
                     </div>
-                    <p style="margin-top: 35px;">
-                        <a class="cart_btn">Add to Cart</a>
-                        <a class="buy_btn">Buy now</a>
-                    </p>
-                </div>
+                
             </div>
 
             <!-- <div class="heading">
@@ -207,7 +223,8 @@ const formatDate = (dateString) => {
                                     <div class="adrm_rating">
                                         <div class="adrm-star-rating">
                                             <span>
-                                                <label v-for="rating in 5" name="rating" :class=" item.rating >= rating ? 'active' : ''" value="1">★</label>
+                                                <rating :rating="item.rating"></rating>
+                                               
                                             </span>
                                         </div>
                                     </div>
@@ -311,11 +328,11 @@ input[type=submit]:hover {
                     font-size: 18px;
                 }
                 span{
-                    level {
-                    color: gray;
+                    label{
                         font-size: 18px;
+                        color:  gray;
                     }
-                    .active {
+                    .active{
                         color: #f1c40f;
                     }
                 }

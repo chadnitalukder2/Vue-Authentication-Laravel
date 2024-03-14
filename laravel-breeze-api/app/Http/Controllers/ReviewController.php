@@ -37,13 +37,7 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get_review()
-    {
-        $review = Review::orderBy('id', 'desc')->with('user')->get();
-        return response()->json([
-            'review' => $review
-        ], 200);
-    }
+    
 
     /**
      * Store a newly created resource in storage.
