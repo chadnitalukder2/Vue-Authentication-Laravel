@@ -102,7 +102,10 @@ const addOrderItem = async () => {
   };
 
 //   console.log({data});
-  await axios.post('/api/add_OrderItem', data);
+  await axios.post('/api/add_OrderItem', data).then(()=> {
+        router.push('/add-cart');
+      
+    });
 };
 //---------------------------------------------------
 </script>
