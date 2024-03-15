@@ -19,6 +19,19 @@ const getOrderItem = async () => {
     orderItem.value = response.data.orderItem;
     console.log("response", orderItem.value);
 };
+const updateLineTotal = (item) => {
+  item.line_total = item.quantity * item.line_total;
+  console.log('bhyu', item);
+}
+const subTotal = () =>{
+  let result = 0;
+  for (let i = 0; i < orderItem.value.length; i++) {
+    result += orderItem.value[i].line_total;
+  }
+  console.log(orderItem.value.length,'dsfsdf')
+
+  return result;
+}
 //-------------------------------------
 </script>
 
@@ -31,18 +44,19 @@ const getOrderItem = async () => {
           <th>Name</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Total</th>
+          <th>Line Total</th>
           <th>Action</th>
         </tr>
         
         <tr v-for="item in orderItem" :key="item.id">
           <td> 
-            <img :src="item.product.product_img" style="width: 70px; height: 60px" >
+            <img :src="item.product.product_img" style="width: 100px; height: 80px" >
           </td>
           <td>{{ item.product.product_name }}</td>
           <td>{{ item.product.product_price }}</td>
           <td>
-            <input type="number" v-model="item.quantity">
+            <input type="number" v-model="item.quantity" @change="updateLineTotal(item)">
+            
           </td>
           <td>${{ item.line_total }}</td>
           <td><i class="fa-solid fa-xmark" style="    background: #D1EAE4; padding: 5px 8px;"></i></td>
@@ -57,7 +71,7 @@ const getOrderItem = async () => {
       <h3>Cart Totals</h3>
       <p class="d-flex">
         <span>Subtotal</span>
-        <span>$20.60</span>
+        <span>${{ subTotal() }}</span>
       </p>
       <p class="d-flex">
         <span>Delivery</span>
