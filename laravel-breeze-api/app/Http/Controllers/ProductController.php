@@ -6,12 +6,18 @@ use App\Models\Category;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     public function get_product(){
         
         $products = Product::orderBy('id', 'desc')->with('category', 'brand')->get();
+        
+        foreach ($products as $product) {
+            $product->product_colors = json_decode($product->product_colors);
+            $product->product_sizes = json_decode($product->product_sizes);
+        }    
         return response()->json([
             'products' => $products
         ], 200);
@@ -49,7 +55,10 @@ class ProductController extends Controller
             'product_quantity' => $request->product_quantity,
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
+            'short_description' => $request->short_description,
             'product_details' => $request->product_details,
+            'product_colors' => $request->product_colors,
+            'product_sizes' => $request->product_sizes,
             'product_img' =>  $imagePath,
             'created_at' => Carbon::now(),
         ]);
@@ -66,9 +75,15 @@ class ProductController extends Controller
     }
 
     public function edit_product($id){
-        $product = Product::find($id);
+        $product = Product::with('reviews.user')->find($id);
+        $averageRating = $product->averageRating();
+        $product->average_rating = round($averageRating, 2);
+
+        $product->product_colors = json_decode($product->product_colors);
+        $product->product_sizes = json_decode($product->product_sizes);
         return response()->json([
-            'product' => $product
+            'product' => $product,
+            'user_id' => Auth::user()->id,
         ], 200);
     }
 
@@ -81,6 +96,9 @@ class ProductController extends Controller
                 'product_quantity' => $request->product_quantity,
                 // 'brand_id ' => $request->brand_id ,
                 // 'category_id ' => $request->category_id ,
+                'product_colors' => $request->product_colors,
+                'product_sizes' => $request->product_sizes,
+                'short_description' => $request->short_description,
                 'product_details' => $request->product_details,
         ]);
       

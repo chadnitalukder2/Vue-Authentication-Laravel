@@ -14,7 +14,16 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function reviews() {
+        return $this->hasMany(Review::class)->latest();;
+    }
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
+
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
+ 
 }
