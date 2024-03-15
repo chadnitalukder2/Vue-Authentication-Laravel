@@ -22,7 +22,7 @@ const getOrderItem = async () => {
     console.log("response", orderItem.value);
 };
 const updateLineTotal = (item) => {
-  item.line_total = item.quantity * item.line_total;
+  item.line_total = item.quantity * item.product.product_price;
   console.log('bhyu', item);
 
 }
