@@ -11,6 +11,8 @@ const orderItem = ref([]);
 //---------------------------------------------------
 onMounted(async () => {
     getOrderItem();
+    subTotal();
+    total();
 });
 //----------------------------
 
@@ -22,6 +24,7 @@ const getOrderItem = async () => {
 const updateLineTotal = (item) => {
   item.line_total = item.quantity * item.line_total;
   console.log('bhyu', item);
+
 }
 const subTotal = () =>{
   let result = 0;
@@ -31,6 +34,11 @@ const subTotal = () =>{
   console.log(orderItem.value.length,'dsfsdf')
 
   return result;
+}
+
+const total = () => {
+  let totalValue = subTotal() + 50 - 5;
+  return totalValue;
 }
 //-------------------------------------
 </script>
@@ -75,16 +83,16 @@ const subTotal = () =>{
       </p>
       <p class="d-flex">
         <span>Delivery</span>
-        <span>$0.00</span>
+        <span>$50.00</span>
       </p>
       <p>
         <span>Discount</span>
-        <span>$3.00</span>
+        <span>$5.00</span>
       </p>
       <hr style="background: rgba(255, 255, 255, 0.1)" />
       <p>
         <span>TOTAL</span>
-        <span style="color: #000000; font-weight: 600">$17.60</span>
+        <span style="color: #000000; font-weight: 600">${{ total() }}</span>
       </p>
     </div>
     <p class="check_out"><a href="">Proceed to Checkout</a></p>
