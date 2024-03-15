@@ -41,6 +41,10 @@ class OrderItemsController extends Controller
         ], 200);
         // return $this->belongsTo(Product::class);
     }
+    public function delete_OrderItem($id){
+        $orderItem = OrderItems::findOrFail($id);
+        $orderItem->delete();
+    }
 
     /**
      * Store a newly created resource in storage.

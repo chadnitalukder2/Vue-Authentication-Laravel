@@ -50,3 +50,5 @@ Route::post('/add_review', [ReviewController::class, 'add_review']);
 
 Route::post('/add_OrderItem', [OrderItemsController::class, 'add_OrderItem']);
 Route::get('/get_OrderItem', [OrderItemsController::class, 'get_OrderItem']);
+Route::get('/delete_OrderItem/{id}', [OrderItemsController::class, 'delete_OrderItem']);
+

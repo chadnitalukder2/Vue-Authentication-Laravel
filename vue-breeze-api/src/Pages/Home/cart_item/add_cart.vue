@@ -40,6 +40,12 @@ const total = () => {
   let totalValue = subTotal() + 50 - 5;
   return totalValue;
 }
+
+const deleteOrderItem = (id) => {
+    axios.get(`/api/delete_OrderItem/${id}`).then( () => {
+      getOrderItem();
+    })
+}
 //-------------------------------------
 </script>
 
@@ -67,7 +73,7 @@ const total = () => {
             
           </td>
           <td>${{ item.line_total }}</td>
-          <td><i class="fa-solid fa-xmark" style="    background: #D1EAE4; padding: 5px 8px;"></i></td>
+          <td @click="deleteOrderItem(item.id)"><i class="fa-solid fa-xmark" style="    background: #D1EAE4; padding: 5px 8px;"></i></td>
         </tr>
 
     
