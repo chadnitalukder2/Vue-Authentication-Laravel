@@ -53,7 +53,7 @@ const getBrand = async () => {
 
 <template>
  <!-- #fdebcb -->
- <div class="container" style="width: 100%;">
+ <div class="container" >
     <Hero />
     <div>
         <h4 class="product-title"> CATEGORY </h4>
@@ -87,6 +87,9 @@ const getBrand = async () => {
 </template>
 
 <style lang="scss" scoped>
+.container{
+    width: 100%;
+}
 .product-title {
     font-size: 24px;
     font-weight: 600;

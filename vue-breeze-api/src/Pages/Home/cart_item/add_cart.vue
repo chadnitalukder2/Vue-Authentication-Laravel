@@ -108,7 +108,6 @@ const deleteOrderItem = (id) => {
 
 <style lang="scss" scoped>
 .container {
-  width: 100%;
   padding: 80px 100px;
   text-align: center;
 }

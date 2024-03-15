@@ -23,7 +23,7 @@ const getUser = async () => {
 <div>
 
   <Nav :user="user"></Nav>
-  <main style="display: flex; width: 100%;">
+  <main style=" width: 100%;">
       <router-view></router-view>
   </main>
 </div>
