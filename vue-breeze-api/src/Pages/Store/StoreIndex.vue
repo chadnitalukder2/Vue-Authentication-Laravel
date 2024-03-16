@@ -1,14 +1,9 @@
 <script setup>
 import Card from "../Home/Product_card.vue";
 
-import {
-    ref,
-    onMounted
-} from "vue";
+import {ref,onMounted} from "vue";
 import axios from "axios";
-import {
-    useRouter
-} from "vue-router";
+import { useRouter} from "vue-router";
 const router = useRouter();
 
 //============================================
@@ -21,8 +16,10 @@ onMounted(async () => {
 const getProduct = async () => {
     let response = await axios.get("/api/get_product");
     products.value = response.data.products;
-    console.log("response", products.value);
+    // console.log("response", products.value);
 };
+
+
 //=====================================
 </script>
 
@@ -34,15 +31,8 @@ const getProduct = async () => {
                 <div class="filter_option" style="flex-basis: 33%;text-align: start;">
                     <select>
                         <option value="0">Filter</option>
-                        <option value="1">Audi</option>
-                        <option value="2">BMW</option>
-                        <option value="3">Citroen</option>
-                        <option value="4">Ford</option>
-                        <option value="5">Honda</option>
-                        <option value="6">Jaguar</option>
-                        <option value="7">Land Rover</option>
-                        <option value="8">Mercedes</option>
-                        <option value="9">Mini</option>
+                        <option value="1">Category</option>
+                        <option value="2">Brand</option>
                     </select>
                 </div>
                 <div class="search_box" style="flex-basis: 33%;">

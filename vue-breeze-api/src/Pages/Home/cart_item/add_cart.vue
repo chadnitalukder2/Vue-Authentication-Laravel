@@ -17,15 +17,19 @@ onMounted(async () => {
 //----------------------------
 
 const getOrderItem = async () => {
+    const id = route.params;
+    console.log('routhiuhuunje', id);
     let response = await axios.get("/api/get_OrderItem");
     orderItem.value = response.data.orderItem;
     console.log("response", orderItem.value);
 };
+//------------------------------------------
 const updateLineTotal = (item) => {
   item.line_total = item.quantity * item.product.product_price;
   console.log('bhyu', item);
 
 }
+//------------------------------------------
 const subTotal = () =>{
   let result = 0;
   for (let i = 0; i < orderItem.value.length; i++) {
@@ -35,12 +39,12 @@ const subTotal = () =>{
 
   return result;
 }
-
+//------------------------------------------
 const total = () => {
   let totalValue = subTotal() + 50 - 5;
   return totalValue;
 }
-
+//------------------------------------------
 const deleteOrderItem = (id) => {
     axios.get(`/api/delete_OrderItem/${id}`).then( () => {
       getOrderItem();
@@ -61,7 +65,7 @@ const deleteOrderItem = (id) => {
           <th>Line Total</th>
           <th>Action</th>
         </tr>
-        
+                
         <tr v-for="item in orderItem" :key="item.id">
           <td> 
             <img :src="item.product.product_img" style="width: 100px; height: 80px" >
@@ -70,7 +74,7 @@ const deleteOrderItem = (id) => {
           <td>{{ item.product.product_price }}</td>
           <td>
             <input type="number" v-model="item.quantity" @change="updateLineTotal(item)">
-            
+                    
           </td>
           <td>${{ item.line_total }}</td>
           <td @click="deleteOrderItem(item.id)"><i class="fa-solid fa-xmark" style="    background: #D1EAE4; padding: 5px 8px;"></i></td>
