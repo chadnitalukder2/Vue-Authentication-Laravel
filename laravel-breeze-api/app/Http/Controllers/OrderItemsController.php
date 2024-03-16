@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderItems;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderItemsController extends Controller
 {
@@ -35,7 +36,8 @@ class OrderItemsController extends Controller
      */
     public function get_OrderItem()
     {
-        $orderItem = OrderItems::orderBy('id', 'desc')->with('product')->get();
+        $userId =  Auth::user()->id;
+        $orderItem = OrderItems::orderBy('id', 'desc')->where('user_id', $userId)->with('product')->get();
         return response()->json([
             'orderItem' => $orderItem
         ], 200);

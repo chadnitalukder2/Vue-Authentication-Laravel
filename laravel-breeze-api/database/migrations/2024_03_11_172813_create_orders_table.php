@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('order_item_id');
+
+            $table->string('email');
+            $table->string('address');
+            $table->integer('phone');
+
             $table->integer('total_amount');
             
             $table->string('order_status')->default('pending');

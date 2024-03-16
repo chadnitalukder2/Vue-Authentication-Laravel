@@ -94,7 +94,7 @@ const handleLogin = async () => {
   </section> -->
 
 
-  <form @submit.prevent="handleLogin" method="post">
+  <form @submit.prevent="handleLogin" method="post" style="width: 50%;">
     <!-- <div class="imgcontainer">
     <img src="img_avatar2.png" alt="Avatar" class="avatar">
   </div> -->
