@@ -41,10 +41,10 @@ class OrderController extends Controller
                 $orderItem->save();
 
                 // Update product_quantity in products table
-                $product = Product::find($orderItems->product_id);
+                $product = Product::find($orderItem->product_id);
 
-                if ($product->product_quantity >= $orderItems->quantity) {
-                    $product->product_quantity = $product->product_quantity - $orderItems->quantity;
+                if ($product->product_quantity >= $orderItem->quantity) {
+                    $product->product_quantity = $product->product_quantity - $orderItem->quantity;
                     $product->save();
                 } else {
                     throw new \Exception("Product quantity is too much. Please check the quantity and try again.");
