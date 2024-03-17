@@ -53,19 +53,19 @@ const getBrand = async () => {
 
 <template>
  <!-- #fdebcb -->
- <div class="container" style="width: 100%;">
+ <div class="container" >
     <Hero />
     <div>
         <h4 class="product-title"> CATEGORY </h4>
         <div class="product-wrapper">
-            <Category_card v-for="category in category" :key="category.id" :category="category"/>
+            <Category_card v-for="category in category.slice(0, 7)" :key="category.id" :category="category"/>
         </div>
     </div>
 
     <div>
         <h4 class="product-title"> BRAND </h4>
         <div class="product-wrapper">
-            <Brand_card v-for="brand in brand " :key="brand.id" :brand="brand"/>
+            <Brand_card v-for="brand in brand.slice(0, 7) " :key="brand.id" :brand="brand"/>
         </div>
     </div>
 
@@ -73,7 +73,7 @@ const getBrand = async () => {
         <h4 class="product-title">All PRODUCTS</h4>
         <div class="product-wrapper">
 
-            <Card  v-for="product in products" :key="product.id" :product="product"/>
+            <Card  v-for="product in products.slice(0, 8)" :key="product.id" :product="product"/>
         
         </div>
     </div>
@@ -87,6 +87,9 @@ const getBrand = async () => {
 </template>
 
 <style lang="scss" scoped>
+.container{
+    width: 100%;
+}
 .product-title {
     font-size: 24px;
     font-weight: 600;

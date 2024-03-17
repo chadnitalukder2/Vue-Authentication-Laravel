@@ -78,7 +78,6 @@ const deleteProduct = (id) => {
 
 <style lang="scss" scoped>
 .product {
-  width: 109%;
   padding-left: 9rem;
   padding-top: 50px;
 

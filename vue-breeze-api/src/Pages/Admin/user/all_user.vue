@@ -55,7 +55,7 @@ const deleteUser = (id) => {
 <style scoped>
 .user {
   width: 109%;
-  padding-left: 14rem;
+  padding-left: 12rem;
   padding-top: 50px;
 }
 #customers {

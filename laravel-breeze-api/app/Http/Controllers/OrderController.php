@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItems;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -12,10 +16,53 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function add_orders(Request $request)
     {
-        //
+        $orderItemsIds = $request->order_items_id;
+        DB::beginTransaction();
+        try {
+            $orders = new Order([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'address' => $request->input('address'),
+                'phone' => $request->input('phone'),
+                'total_amount' => $request->input('total_amount'),
+                'user_id' => Auth::user()->id,
+            ]);
+    
+            $orders->save();
+            $order_id = $orders->id;
+    
+            foreach ($orderItemsIds as $orderItemsId) {
+                // Update order_id and status in order_items table
+                $orderItem = OrderItems::find($orderItemsId);
+                $orderItem->order_id = $order_id;
+                $orderItem->status = 'ordered';
+                $orderItem->save();
+
+                // Update product_quantity in products table
+                $product = Product::find($orderItems->product_id);
+
+                if ($product->product_quantity >= $orderItems->quantity) {
+                    $product->product_quantity = $product->product_quantity - $orderItems->quantity;
+                    $product->save();
+                } else {
+                    throw new \Exception("Product quantity is too much. Please check the quantity and try again.");
+                }
+                
+            }
+
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => $e->getMessage() ], 500);
+        }
+        
+    
+        return response()->json(['message' => 'orders added successfully'], 201);
     }
+
 
     /**
      * Show the form for creating a new resource.

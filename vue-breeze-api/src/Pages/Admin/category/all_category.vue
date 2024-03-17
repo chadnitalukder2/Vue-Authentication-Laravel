@@ -71,7 +71,7 @@ const getToken = async () => {
 <style lang="scss" scoped>
 .category {
   width: 109%;
-  padding-left: 15rem;
+  padding-left: 14rem;
   padding-top: 50px;
 
   .btn{

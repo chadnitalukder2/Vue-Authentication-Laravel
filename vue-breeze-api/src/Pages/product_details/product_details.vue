@@ -48,7 +48,7 @@ const getProduct = async () => {
     let response = await axios.get(`/api/edit_product/${id}`);
     product.value = response.data.product
     user_id.value = response.data
-    // console.log('responseydyhfb', response.data);
+    console.log('responseydyhfb', product.value);
 }
 //---------------------------------------------------
 const getCategory = async () => {
@@ -253,7 +253,7 @@ const addOrderItem = async () => {
                         <textarea name="message" v-model="reviews.review"></textarea>
 
                         <input type="submit" value="Submit">
-                    </form>
+                        </form>
                     </div>           
                 </div>
             </div>
