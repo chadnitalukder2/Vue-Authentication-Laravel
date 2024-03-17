@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('product_img');
             $table->string('product_sizes')->nullable();
             $table->string('product_colors')->nullable();
-            $table->text('short_description')->nullable()->change();
+            $table->text('short_description')->nullable();
             $table->text('product_details')->nullable();
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\OrderItemsController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
@@ -52,3 +53,4 @@ Route::post('/add_OrderItem', [OrderItemsController::class, 'add_OrderItem']);
 Route::get('/get_OrderItem', [OrderItemsController::class, 'get_OrderItem']);
 Route::get('/delete_OrderItem/{id}', [OrderItemsController::class, 'delete_OrderItem']);
 
+Route::post('/add_orders', [OrderController::class, 'add_orders']);

@@ -24,6 +24,7 @@ const getUser = async () => {
 
   <Nav :user="user"></Nav>
   <main style=" width: 100%;">
+      <notifications />
       <router-view></router-view>
   </main>
 </div>

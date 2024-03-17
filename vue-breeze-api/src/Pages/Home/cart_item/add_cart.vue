@@ -1,4 +1,7 @@
 <script setup>
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify }  = useNotification();
+
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -8,11 +11,14 @@ const route = useRoute()
 
 //----------------------------------------------------
 const orderItem = ref([]);
+const order = ref({
+  selectedItems: [],
+  sub_total: 0,
+  total: 0
+})
 //---------------------------------------------------
 onMounted(async () => {
     getOrderItem();
-    subTotal();
-    total();
 });
 //----------------------------
 
@@ -21,36 +27,73 @@ const getOrderItem = async () => {
     console.log('routhiuhuunje', id);
     let response = await axios.get("/api/get_OrderItem");
     orderItem.value = response.data.orderItem;
-    console.log("response", orderItem.value);
+    subTotal();
+    total();
 };
 //------------------------------------------
 const updateLineTotal = (item) => {
   item.line_total = item.quantity * item.product.product_price;
-  console.log('bhyu', item);
-
+  subTotal();
+  total();
 }
 //------------------------------------------
 const subTotal = () =>{
   let result = 0;
   for (let i = 0; i < orderItem.value.length; i++) {
-    result += orderItem.value[i].line_total;
+    if(order.value.selectedItems.includes(orderItem.value[i].id)){
+     result += orderItem.value[i].line_total;
+    }
   }
-  console.log(orderItem.value.length,'dsfsdf')
-
-  return result;
+  console.log({order}, result, orderItem.value)
+  order.value.sub_total = result;
 }
 //------------------------------------------
 const total = () => {
-  let totalValue = subTotal() + 50 - 5;
-  return totalValue;
+  let totalValue = order.value.sub_total + 50 - 5;
+  order.value.total = totalValue;
 }
 //------------------------------------------
 const deleteOrderItem = (id) => {
     axios.get(`/api/delete_OrderItem/${id}`).then( () => {
+      notify({
+        title: "Order Item Deleted",
+        type: "success",
+      });
       getOrderItem();
     })
 }
 //-------------------------------------
+const addOrders = async () => {
+  let data = {
+    name: order.value.name,
+    email: order.value.email,
+    address: order.value.address,
+    phone: order.value.phone, 
+    total_amount: order.value.total,
+    order_items_id: order.value.selectedItems
+  }
+  await axios.post("/api/add_orders", data).then( (res) => {
+    if(res.status == 201){
+      notify({
+        title: "Order Placed Successfully",
+        type: "success",
+      });
+      getOrderItem();
+    } else {
+      notify({
+        title: "Order Placed Failed",
+        text: res.data.message,
+        type: "error",
+      });
+    }
+  }).catch( (err) => {
+    notify({
+      title: "Order Placed Failed",
+      text: err.response.data.message,
+      type: "error",
+    });
+  })
+}
 </script>
 
 <template>
@@ -58,6 +101,7 @@ const deleteOrderItem = (id) => {
     <div class="table" style="padding-bottom: 85px">
       <table>
         <tr>
+          <th></th>
           <th>Image</th>
           <th>Name</th>
           <th>Price</th>
@@ -67,6 +111,9 @@ const deleteOrderItem = (id) => {
         </tr>
                 
         <tr v-for="item in orderItem" :key="item.id">
+          <td>
+            <input @change="subTotal()" type="checkbox" :name="`order-item-${item.id}`" :id="item.id" v-model="order.selectedItems" :value="item.id">
+          </td>
           <td> 
             <img :src="item.product.product_img" style="width: 100px; height: 80px" >
           </td>
@@ -90,7 +137,7 @@ const deleteOrderItem = (id) => {
           <h3>Cart Totals</h3>
           <p class="d-flex">
             <span>Subtotal</span>
-            <span>${{ subTotal() }}</span>
+            <span>${{ order.sub_total }}</span>
           </p>
           <p class="d-flex">
             <span>Delivery</span>
@@ -103,25 +150,31 @@ const deleteOrderItem = (id) => {
           <hr style="background: rgba(255, 255, 255, 0.1)" />
           <p>
             <span>TOTAL</span>
-            <span style="color: #000000; font-weight: 600">${{ total() }}</span>
+            <span style="color: #000000; font-weight: 600">${{ order.total }}</span>
           </p>
         </div>
       </div>
       <div class="order-form">
-        <form > 
+        <h2>Shipping Address</h2>
+        <form @submit.prevent="addOrders">
+          <div class="input_box" >
+            <label ><b>Write your name : </b></label><br>
+            <input v-model="order.name" type="text" name="name" placeholder="name" >
+          </div>
+
           <div class="input_box" >
             <label ><b>Write your email : </b></label><br>
-            <input type="email" name="message" placeholder="email" >
+            <input v-model="order.email"  type="email" name="message" placeholder="email" >
+          </div>
+
+          <div class="input_box" >
+            <label for="message"><b>Write your phone number : </b></label><br>
+            <input v-model="order.phone"  type="number" name="phone" placeholder="number" >
           </div>
             
           <div class="input_box" >
             <label ><b> Write your  address : </b></label><br>
-            <input type="text" name="message" placeholder="address" >
-          </div>
-            
-          <div class="input_box" >
-            <label for="message"><b>Write your phone number : </b></label><br>
-            <input type="number" name="message" placeholder="number" >
+            <input v-model="order.address"  type="text" name="message" placeholder="address" >
           </div>
           
             <input type="submit" class="check_out" value="Proceed to Checkout">

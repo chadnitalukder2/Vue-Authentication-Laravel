@@ -37,7 +37,8 @@ class OrderItemsController extends Controller
     public function get_OrderItem()
     {
         $userId =  Auth::user()->id;
-        $orderItem = OrderItems::orderBy('id', 'desc')->where('user_id', $userId)->with('product')->get();
+        $orderItem = OrderItems::orderBy('id', 'desc')->where('user_id', $userId)->where('status', 'cart')->with('product')->get();
+
         return response()->json([
             'orderItem' => $orderItem
         ], 200);
